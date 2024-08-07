@@ -21,9 +21,7 @@
 #ifndef GLOBAL_FONT_STORAGE_H
 #define GLOBAL_FONT_STORAGE_H
 
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "DEBUG.h"
+#include "Library.h"
 
 class GlobalFontStorage
 {

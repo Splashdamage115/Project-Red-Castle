@@ -1,11 +1,9 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include<iostream>
-#include<SFML/Graphics.hpp>
+#include "Library.h"
 #include"RenderObject.h"
 #include"Globals.h"
-#include"DEBUG.h"
 #include<functional>
 
 ///////////////////////////////////////////////

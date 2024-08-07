@@ -32,9 +32,7 @@
 #ifndef SIMPLE_BUTTON_HPP
 #define SIMPLE_BUTTON_HPP
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-#include <iostream>
+#include "Library.h"
 
 #include "GlobalFontStorage.h"
 #include "RenderObject.h"

@@ -6,9 +6,7 @@
 /// <summary>
 /// include guards used so we don't process this file twice
 /// </summary>
-#include <SFML/Graphics.hpp>
-#include<iostream>
-#include"Globals.h"
+#include "Library.h"
 #include"RenderObject.h"
 
 // Abstract class

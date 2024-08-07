@@ -1,4 +1,4 @@
-#include"RenderObject.h"
+#include "RenderObject.h"
 #include "SettingsStorage.h"
 
 RenderObject::RenderObject() :

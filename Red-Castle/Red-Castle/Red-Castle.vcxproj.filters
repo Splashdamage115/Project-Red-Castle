@@ -93,6 +93,9 @@
     <ClCompile Include="src\GamePlay.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\AnimatedSprite.cpp">
+      <Filter>Source Files\Not Current\Gloabals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -249,6 +252,9 @@
       <Filter>Header Files\Not Current\Globals</Filter>
     </ClInclude>
     <ClInclude Include="include\Library.h">
+      <Filter>Header Files\Not Current\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedSprite.h">
       <Filter>Header Files\Not Current\Globals</Filter>
     </ClInclude>
   </ItemGroup>

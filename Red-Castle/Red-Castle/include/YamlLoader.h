@@ -1,9 +1,8 @@
 #ifndef YAML_LOADER_H
 #define YAML_LOADER_H
 
-#include <vector>
+#include "Library.h"
 #include <fstream>
-#include <iostream>
 #include "yaml-cpp\yaml.h"
 #include "Globals.h"
 

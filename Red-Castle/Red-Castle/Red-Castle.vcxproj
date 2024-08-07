@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AnimatedSprite.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />

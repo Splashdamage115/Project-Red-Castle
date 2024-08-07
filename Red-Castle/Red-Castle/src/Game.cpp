@@ -5,7 +5,6 @@
 /// </summary>
 
 #include "Game.h"
-#include <iostream>
 #include "GlobalFontStorage.h"
 #include "Menu.h"
 #include "Settings.h"
