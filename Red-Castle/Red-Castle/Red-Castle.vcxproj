@@ -21,31 +21,43 @@
   <ItemGroup>
     <ClCompile Include="src\AnimatedSprite.cpp" />
     <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\cameraTracker.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RenderObject.cpp" />
     <ClCompile Include="src\Settings.cpp" />
+    <ClCompile Include="src\SplashScreen.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AnimatedSprite.h" />
     <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\cameraTracker.h" />
     <ClInclude Include="include\DEBUG.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />
     <ClInclude Include="include\GamePlay.h" />
     <ClInclude Include="include\GlobalFontStorage.h" />
     <ClInclude Include="include\Globals.h" />
+    <ClInclude Include="include\InputSwitcher.hpp" />
     <ClInclude Include="include\Library.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\RenderObject.h" />
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\SettingsStorage.h" />
     <ClInclude Include="include\SimpleButton.h" />
     <ClInclude Include="include\simpleMaths.h" />
+    <ClInclude Include="include\SplashScreen.h" />
+    <ClInclude Include="include\TextureLoader.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />
     <ClInclude Include="include\yaml-cpp\contrib\anchordict.h" />

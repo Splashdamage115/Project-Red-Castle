@@ -69,11 +69,11 @@ void GameMode::processMouse(sf::Event& t_event)
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
-		mouseButtonDown();
+		//mouseButtonDown();
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
-		mouseButtonUp();
+		//mouseButtonUp();
 	}
 }
 */

@@ -40,7 +40,7 @@ void Menu::resetLevel()
 	m_hudText->setFillColor(sf::Color::White);
 	m_hudText->setOutlineColor(sf::Color::Black);
 	m_hudText->setOutlineThickness(0.5f);
-	m_hudText->setString("Sample_Text");
+	m_hudText->setString("Red Castle");
 	m_hudText->setOrigin(m_hudText->getGlobalBounds().width / 2.f , m_hudText->getGlobalBounds().height / 2.f);
 	m_hudText->setPosition(SCREEN_WIDTH / 2.f, 200.f);
 

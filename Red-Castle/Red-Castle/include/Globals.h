@@ -10,7 +10,8 @@ enum class GameModeClass
 	None,
 	Menu,
 	Gameplay,
-	Settings
+	Settings,
+	SplashScreen
 };
 
 struct Vector2i

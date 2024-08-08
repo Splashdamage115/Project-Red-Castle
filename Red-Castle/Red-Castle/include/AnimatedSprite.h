@@ -12,6 +12,8 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	sf::FloatRect getLocalBounds() { return m_sprite.getLocalBounds(); }
+	sf::Vector2f getScale() { return m_sprite.getScale(); }
 	void setTexture(sf::Texture& t_newTexture)
 	{
 		m_sprite.setTexture(t_newTexture);
@@ -40,6 +42,7 @@ public:
 		if(m_active)
 			target.draw(m_sprite, states);
 	}
+	void move(sf::Vector2f& t_newPos) { m_sprite.move(t_newPos); }
 	void setScale(sf::Vector2f t_newScale) { m_sprite.setScale(t_newScale); }
 	sf::Vector2f getPosition() { return m_sprite.getPosition(); }
 	sf::FloatRect getGlobalBounds() { return m_sprite.getGlobalBounds(); }

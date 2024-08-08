@@ -9,10 +9,11 @@
 #include "Menu.h"
 #include "Settings.h"
 #include "GamePlay.h"
+#include "SplashScreen.h"
 
 
 // setup of static variables
-GameModeClass Game::s_currentGameMode = GameModeClass::Menu;
+GameModeClass Game::s_currentGameMode = GameModeClass::SplashScreen;
 bool Game::s_changeGameMode = true;
 bool Game::s_gameActive = true;
 float Game::deltaTime = 0.f;
@@ -143,13 +144,16 @@ void Game::changeGameMode()
 	if (s_changeGameMode)
 	{
 		RenderObject::getInstance().clear();
+		RenderObject::getInstance().resetCamera();
 
 		if (s_currentGameMode == GameModeClass::Menu)
 			m_gameMode = std::make_shared<Menu>();
 		else if (s_currentGameMode == GameModeClass::Gameplay)
 			m_gameMode = std::make_shared<GamePlay>();
 		else if (s_currentGameMode == GameModeClass::Settings)
-			m_gameMode = std::make_shared<Settings>();
+			m_gameMode = std::make_shared<Settings>(); 
+		else if (s_currentGameMode == GameModeClass::SplashScreen)
+			m_gameMode = std::make_shared<SplashScreen>();
 
 		s_changeGameMode = false;
 	}

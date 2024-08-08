@@ -2,11 +2,9 @@
 #ifndef GAMEMODE_H
 #define GAMEMODE_H
 
-#include<SFML/Graphics.hpp>
-#include"Globals.h"
-#include"RenderObject.h"
-
-#include"DEBUG.h" // this is used for DEBUG_MSG
+#include "Library.h"
+#include "Globals.h"
+#include "RenderObject.h"
 
 class GameMode
 {

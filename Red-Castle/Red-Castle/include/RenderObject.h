@@ -54,7 +54,9 @@
 #ifndef RENDER_OBJECT_H
 #define RENDER_OBJECT_H
 
-#include "Library.h"
+#include<SFML/Graphics.hpp>
+#include<vector>
+#include<iostream>
 
 #include"Globals.h"
 
@@ -73,6 +75,12 @@ public:
 
     sf::RenderWindow& getWindow() { return m_window; }
     void closeWindow() { m_window.close(); }
+    sf::View& getCameraView() { return m_cameraView; }
+
+    //updates camera view
+    void updateCamera(sf::Vector2f t_move);
+    void setCamera(sf::Vector2f t_newPosition);
+    void resetCamera();
 
     void loadsettings();
 
@@ -82,6 +90,7 @@ public:
     void addHUD(std::shared_ptr<sf::Drawable> t_new);
     // add a new item to the background (drawn at the bottom)
     void addBG(std::shared_ptr<sf::Drawable> t_new);
+
 
     // clear list of render objects
     void clear();
@@ -96,7 +105,10 @@ private:
     std::vector<std::weak_ptr< sf::Drawable >> m_backGround;
     std::vector<std::weak_ptr< sf::Drawable >> m_assets;
 
+
     sf::RenderWindow m_window;
+    sf::View m_cameraView;
+    sf::View m_hudView;
 };
 
 #endif // !RENDER_OBJECT_H

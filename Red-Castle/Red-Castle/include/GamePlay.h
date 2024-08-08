@@ -1,7 +1,11 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
-#include"GameMode.h"
+#include "GameMode.h"
+
+// stuff to do with the game
+#include "EnemyManager.h"
+#include "Player.h"
 
 class GamePlay : public GameMode
 {
@@ -17,6 +21,8 @@ private:
 	void processKeys(sf::Event& t_event)override;      // handles all key inputs
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
+	EnemyManager m_enemyManager;
+	Player m_player;
 };
 
 #endif // !GAMEPLAY_H

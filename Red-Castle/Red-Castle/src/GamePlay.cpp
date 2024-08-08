@@ -5,6 +5,7 @@
 /// </summary>
 GamePlay::GamePlay()
 {
+	resetLevel();
 }
 
 /// <summary>
@@ -19,6 +20,7 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
+	m_player.init(sf::Vector2f(250.f, 250.f));
 }
 
 /// <summary>
@@ -44,7 +46,15 @@ void GamePlay::events(sf::Event& t_event)
 /// <param name="t_event">use this for the key press</param>
 void GamePlay::processKeys(sf::Event& t_event)
 {
-
+	// spawn enemy on random type, position and speed
+	if (t_event.key.code == sf::Keyboard::Space)
+	{
+		EnemyInfo enemyInfo;
+		enemyInfo.enemyType = static_cast<EnemyType>(rand() % 2);
+		enemyInfo.moveSpeed = (rand() % 100) + 10;
+		enemyInfo.spawnPos = sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT);
+		m_enemyManager.spawnNewEnemy(enemyInfo);
+	}
 }
 
 /// <summary>
@@ -53,6 +63,8 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	m_player.update();
+	m_enemyManager.update(m_player.getPos()); // enemies always chase player
 }
 
 /// <summary>

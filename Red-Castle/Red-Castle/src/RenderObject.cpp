@@ -1,5 +1,6 @@
 #include "RenderObject.h"
 #include "SettingsStorage.h"
+#include "simpleMaths.h"
 
 RenderObject::RenderObject() :
 	m_window{ sf::VideoMode{ SCREEN_WIDTH, SCREEN_HEIGHT, 32U }, "Epsilon" }
@@ -7,7 +8,9 @@ RenderObject::RenderObject() :
 	loadsettings();
 
 	// set the screen to the standard 1920x1080
-	m_window.setView(sf::View(sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f),sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT))); 
+	m_cameraView = sf::View(sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f), sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+	m_hudView = sf::View(sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f), sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT));
+	m_window.setView(m_cameraView);
 }
 
 
@@ -28,6 +31,22 @@ void RenderObject::appendToObject(std::vector<std::weak_ptr<sf::Drawable>>& t_ob
 	}
 
 	t_obj.push_back(t_new);
+}
+
+void RenderObject::updateCamera(sf::Vector2f t_move)
+{
+	m_cameraView.move(t_move);
+	m_window.setView(m_cameraView);
+}
+
+void RenderObject::setCamera(sf::Vector2f t_newPosition)
+{
+	m_cameraView.setCenter(t_newPosition);
+	m_window.setView(m_cameraView);
+}
+void RenderObject::resetCamera()
+{
+	setCamera(sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f));
 }
 void RenderObject::loadsettings()
 {
@@ -69,16 +88,16 @@ void RenderObject::clear()
 void RenderObject::render()
 {
 	m_window.clear();
+	m_window.setView(m_cameraView);
 	for (unsigned int i = 0; i < m_backGround.size(); i++)
 		if (m_backGround.at(i).lock() != nullptr)
 			m_window.draw(*m_backGround.at(i).lock());
-
 
 	for (unsigned int i = 0; i < m_assets.size(); i++)
 		if (m_assets.at(i).lock() != nullptr)
 			m_window.draw(*m_assets.at(i).lock());
 
-
+	m_window.setView(m_hudView);
 	for (unsigned int i = 0; i < m_hud.size(); i++)
 		if (m_hud.at(i).lock() != nullptr)
 			m_window.draw(*m_hud.at(i).lock());
