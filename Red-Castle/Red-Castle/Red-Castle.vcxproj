@@ -41,6 +41,7 @@
     <ClInclude Include="include\cameraTracker.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnemyInfo.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />
@@ -56,6 +57,7 @@
     <ClInclude Include="include\SettingsStorage.h" />
     <ClInclude Include="include\SimpleButton.h" />
     <ClInclude Include="include\simpleMaths.h" />
+    <ClInclude Include="include\SoundPlayer.h" />
     <ClInclude Include="include\SplashScreen.h" />
     <ClInclude Include="include\TextureLoader.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />

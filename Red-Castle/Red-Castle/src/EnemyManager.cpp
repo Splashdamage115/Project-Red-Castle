@@ -8,7 +8,7 @@ EnemyManager::~EnemyManager()
 {
 }
 
-void EnemyManager::spawnNewEnemy(EnemyInfo& t_enemyInfo)
+void EnemyManager::spawnNewEnemy(EnemySetupInfo& t_enemyInfo)
 {
 	// initialise enemy into a vector (no overflow protection yet)
 	Enemy newEnemy;

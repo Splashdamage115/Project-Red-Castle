@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "TextureLoader.h"
 #include "RenderObject.h"
+#include "SoundPlayer.h"
 
 /// <summary>
 /// default constructor
@@ -69,6 +70,8 @@ void SplashScreen::resetLevel()
 
 	m_logo->setOrigin(sf::Vector2f(m_logo->getGlobalBounds().width / 2.f, m_logo->getGlobalBounds().height / 2.f));
 	m_logo->setPosition(sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f));
+
+	SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\WhooshSound.wav");
 }
 
 /// <summary>

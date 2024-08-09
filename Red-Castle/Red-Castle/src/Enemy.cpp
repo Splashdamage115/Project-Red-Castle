@@ -12,29 +12,41 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::init(EnemyInfo& t_type)
+void Enemy::init(EnemySetupInfo& t_type)
 {
 	m_moveSpeed = t_type.moveSpeed;
 
-
+	m_currentMove = MoveExecute::None;
 	// set the sprite based off the enemy type, and set other relevant parameters
 	switch (t_type.enemyType)
 	{
 	case EnemyType::Slime:
-		m_body = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Slime.png"));
-		m_body->addFrame(sf::IntRect(0, 0, 300, 300));
-		m_body->setScale(sf::Vector2f(0.15f, 0.15f));
+		m_body = std::make_shared<AnimatedSprite>(0.25f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Slime.png")); // initialisse the slime texture
+		m_typeInfo = std::make_shared<Slime>();
+
+		m_body->setScale(sf::Vector2f(0.15f, 0.15f)); // make the slime smaller
+		m_currentMove = MoveExecute::Chase;
 		break;
+	case EnemyType::Goblin:
+		m_body = std::make_shared<AnimatedSprite>(0.25f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Goblin.png"));
+		m_typeInfo = std::make_shared<Goblin>();
 
-
+		m_body->setScale(sf::Vector2f(0.25f, 0.25f)); // make the Goblin smaller
+		m_currentMove = MoveExecute::Chase;
+		break;
 	default:
 		// default type is a barrel (no movement)
 		m_body = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\ExplosiveBarrel.png"));
-		m_body->addFrame(sf::IntRect(0, 0, 40, 63));
+		m_typeInfo = std::make_shared<Barrel>();
 		m_moveSpeed = 0.f;
+
+		m_currentMove = MoveExecute::None;
 		break;
 	}
 
+	m_typeInfo->getMoveFrames(m_body);
+
+	//m_enemyType = t_type.enemyType;
 	
 	// set the enemy to the position passed
 	m_body->setPosition(t_type.spawnPos);
@@ -47,6 +59,30 @@ void Enemy::init(EnemyInfo& t_type)
 }
 
 void Enemy::update(sf::Vector2f& t_playerPos)
+{
+	// update the animation
+	m_body->update();
+	
+	switch (m_currentMove)
+	{
+	case MoveExecute::None:
+		break;
+	case MoveExecute::Chase:
+		calculateMove(t_playerPos);
+		break;
+	case MoveExecute::Melee:
+		attackMelee();
+		break;
+	case MoveExecute::Shoot:
+		attackShoot();
+		break;
+	default:
+		break;
+	}
+}
+
+// different Execute move types
+void Enemy::calculateMove(sf::Vector2f& t_playerPos)
 {
 	// move enemy towards player
 	sf::Vector2f enemyMove = math::displacement(m_body->getPosition(), t_playerPos) * m_moveSpeed * Game::deltaTime;
@@ -61,4 +97,38 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 	{
 		m_body->setScale(sf::Vector2f(std::abs(m_body->getScale().x), m_body->getScale().y));
 	}
+
+	if (math::distance(m_body->getPosition(), t_playerPos) <= m_typeInfo->getMeleeRadius())
+		m_currentMove = MoveExecute::Melee;
+	if (math::distance(m_body->getPosition(), t_playerPos) <= m_typeInfo->getShootRadius())
+		m_currentMove = MoveExecute::Shoot;
+}
+
+void Enemy::attackMelee()
+{
+	if(!m_inAnimation)
+	{
+		m_typeInfo->getMeleeFrames(m_body);
+			
+		// change back when exiting attack
+		m_inAnimation = true;
+		m_maxAnimTime = m_typeInfo->getMeleeTime();
+		m_currentAnimTime = 0.f;
+	}
+	if (m_currentAnimTime > m_maxAnimTime)
+	{
+		m_currentMove = MoveExecute::Chase;
+		m_inAnimation = false;
+		m_typeInfo->getMoveFrames(m_body);
+	}
+	m_currentAnimTime += Game::deltaTime;
+}
+
+void Enemy::attackShoot()
+{
+	/*switch (m_enemyType)
+	{
+	default:
+		break;
+	}*/
 }

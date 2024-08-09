@@ -15,16 +15,16 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>✅ - Enemy Flipping</li>
     <li>✅ - player movement</li>
     <li>✅ - Camera follows player</li>
-    <li>🔴 - Sound Buffer class</li>
+    <li>✅ - Sound Buffer class🟠</li>
     <li>🔴 - music in sound buffer</li>
     <li>🔴 - moving sound for slime</li>
-    <li>🔴 - moving animation for slime</li>
-    <li>🔷 - Player Animation</li>
+    <li>✅ - moving animation for slime</li>
+    <li>✅ - Player Animation</li>
     <li>🔷 - Squash / stretch</li>
     <li>🔷 - power up system</li>
     <li>✅ - logo</li>
     <li>✅ - splash screen</li>
-    <li>🔴 - Sound on splash screen</li>
+    <li>🔷 - Sound on splash screen</li>
 
   </ul>
 <br><br><br>

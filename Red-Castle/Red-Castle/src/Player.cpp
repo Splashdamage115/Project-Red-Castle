@@ -14,9 +14,15 @@ Player::~Player()
 void Player::init(sf::Vector2f t_position)
 {
 	// initialise body
-	m_body = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Slime.png"));
-	m_body->addFrame(sf::IntRect(0, 0, 300, 300));
-	m_body->setScale(sf::Vector2f(0.15f, 0.15f));
+	m_body = std::make_shared<AnimatedSprite>(0.1f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Player.png"));
+	m_body->addFrame(sf::IntRect(0, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 1, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 2, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 3, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 4, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 5, 0, 186, 291));
+	m_body->addFrame(sf::IntRect(186 * 6, 0, 186, 291));
+	m_body->setScale(sf::Vector2f(0.25f, 0.25f));
 	RenderObject::getInstance().add(m_body);
 
 	// set origin
@@ -38,6 +44,10 @@ void Player::update()
 	// move player based on input type (can be used to set up controller input)
 	sf::Vector2f playerMove = m_input->calculateDisplacement() * m_speed * Game::deltaTime;
 	m_body->move(playerMove);
+
+	// update player animation frames
+	if(playerMove.x != 0.f || playerMove.y != 0.f)
+		m_body->update();
 
 	// flip the character depending on movement
 	if (playerMove.x > 0.f)

@@ -49,8 +49,8 @@ void GamePlay::processKeys(sf::Event& t_event)
 	// spawn enemy on random type, position and speed
 	if (t_event.key.code == sf::Keyboard::Space)
 	{
-		EnemyInfo enemyInfo;
-		enemyInfo.enemyType = static_cast<EnemyType>(rand() % 2);
+		EnemySetupInfo enemyInfo;
+		enemyInfo.enemyType = static_cast<EnemyType>(rand() % 3);
 		enemyInfo.moveSpeed = (rand() % 100) + 10;
 		enemyInfo.spawnPos = sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT);
 		m_enemyManager.spawnNewEnemy(enemyInfo);

@@ -12,6 +12,16 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	void clearFrames() // should be immediately followed by more frame adding!!!
+	{
+		m_renderRegions.clear();
+		m_selectedRegion = 0;
+	}
+	void changeTiming(float t_newFrameTime)
+	{
+		m_waitTimeBetweenFrames = t_newFrameTime;
+		m_currentFrameTime = 0.f;
+	}
 	sf::FloatRect getLocalBounds() { return m_sprite.getLocalBounds(); }
 	sf::Vector2f getScale() { return m_sprite.getScale(); }
 	void setTexture(sf::Texture& t_newTexture)

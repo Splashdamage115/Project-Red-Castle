@@ -9,7 +9,7 @@ public:
 	EnemyManager();
 	~EnemyManager();
 
-	void spawnNewEnemy(EnemyInfo& t_enemyInfo);
+	void spawnNewEnemy(EnemySetupInfo& t_enemyInfo);
 
 	void update(sf::Vector2f& t_playerPos);
 
