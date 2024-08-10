@@ -1,5 +1,6 @@
 #include "GamePlay.h"
 #include "ExplosiveManager.h"
+#include "Particles.h"
 #include <ctime>
 
 
@@ -68,7 +69,8 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
-	findMousePosGlobal();
+	findMousePosGlobal(); // mouse in the world
+	ParticleSystem::getInstance().update();
 	m_bulletManager.updateBullets();
 	m_player.update();
 	m_enemyManager.update(m_player.getPos()); // enemies always chase player

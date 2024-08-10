@@ -3,6 +3,7 @@
 #include "ExplosiveManager.h"
 #include "simpleMaths.h"
 #include "SoundPlayer.h"
+#include "Particles.h"
 
 EnemyManager::EnemyManager()
 {
@@ -12,6 +13,7 @@ EnemyManager::~EnemyManager()
 {
 }
 
+// start a new enemy
 void EnemyManager::spawnNewEnemy(EnemySetupInfo& t_enemyInfo)
 {
 	// initialise enemy into a vector (no overflow protection yet)
@@ -29,6 +31,7 @@ void EnemyManager::spawnNewEnemy(EnemySetupInfo& t_enemyInfo)
 	m_enemies.push_back(newEnemy);
 }
 
+// pass update
 void EnemyManager::update(sf::Vector2f& t_playerPos)
 {
 	// update all enemies with the position
@@ -38,6 +41,7 @@ void EnemyManager::update(sf::Vector2f& t_playerPos)
 	}
 }
 
+// check if collidiing with any bullet
 void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
 {
 	for (unsigned int bullet = 0; bullet < t_bullets.size(); bullet++)
@@ -58,6 +62,9 @@ void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
 				{
 					SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\ShotHit-basic.wav");
 					m_enemies.at(enemy).applyDamage(t_bullets.at(bullet).damage);
+
+					ParticleSystem::getInstance().spawnNewParticle(std::string(std::to_string(t_bullets.at(bullet).damage)),m_enemies.at(enemy).getPos(), 24u, sf::Vector2f(0.f, -1.f), 50.f, 1.f,60.f);
+
 					t_bullets.at(bullet).deactivate();
 					break;
 				}
@@ -66,6 +73,7 @@ void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
 	}
 }
 
+// check collision with any explosive radius
 void EnemyManager::checkExplosions()
 {
 	std::vector<ExplosiveRadius> radii = ExplosiveManager::getInstance().getRadii();
@@ -86,6 +94,7 @@ void EnemyManager::checkExplosions()
 				if (CollisionDetector::pixelPerfectTest(radii.at(Explosive).body->getSprite(), m_enemies.at(enemy).getSprite()))
 				{
 					m_enemies.at(enemy).applyDamage(radii.at(Explosive).damage);
+					ParticleSystem::getInstance().spawnNewParticle("FIRE", m_enemies.at(enemy).getPos(), 24u, sf::Vector2f(0.f, -1.f), 50.f, 1.f, 60.f, sf::Color::Red);
 				}
 			}
 		}

@@ -16,18 +16,26 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>✅ - player movement</li>
     <li>✅ - Camera follows player</li>
     <li>✅ - Sound Buffer class🟠</li>
-    <li>🔴 - music in sound buffer</li>
-    <li>🔴 - moving sound for slime</li>
     <li>✅ - moving animation for slime</li>
     <li>✅ - Player Animation</li>
-    <li>🔷 - Squash / stretch</li>
-    <li>🔷 - power up system</li>
+    <li>🔷 - buff system</li>
     <li>✅ - logo</li>
     <li>✅ - splash screen</li>
     <li>🔷 - Sound on splash screen</li>
     <li>🐛 - Sound overlaying other sounds (only one playing at a time)</li>
     <li>⬜ - Go through old stuff and add comments!!!</li>
-
+    <li>🔴 - Enemy hit -1 damage pop up</li>
+    <li>🔴 - Enemy drop system</li>
+    <li>🔴 - Wave system</li>
+    <li>🔴 - player health</li>
+    <li>🔴 - Player body extract</li>
+    <li>🔴 - doctor buff</li>
+    <li>🔴 - Droppable power ups</li>
+    <li>🔴 - Guns</li>
+    <li>🔴 - buyable power buffs</li>
+    <li>🔴 - armour system player health</li>
+    <li>🔴 - Enemy shield</li>
+    <li>🔴 - Level up buffs</li>
   </ul>
 <br><br><br>
   </em></p>

@@ -126,6 +126,9 @@
     <ClCompile Include="src\ExplosiveManager.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -324,6 +327,9 @@
       <Filter>Resource Files\CollisionLibrary</Filter>
     </ClInclude>
     <ClInclude Include="include\ExplosiveManager.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particles.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

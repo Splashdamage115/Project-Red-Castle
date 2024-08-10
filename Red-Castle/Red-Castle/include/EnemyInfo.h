@@ -47,6 +47,10 @@ public:
 	}
 };
 
+
+
+
+
 class Barrel : public EnemyInfo
 {
 public:
@@ -70,6 +74,8 @@ public:
 		t_body->clearFrames();
 		t_body->changeTiming(1.f);
 		t_body->addFrame(sf::IntRect(400, 0, 100, 100));
+		t_body->addFrame(sf::IntRect(500, 0, 100, 100));
+		t_body->addFrame(sf::IntRect(600, 0, 100, 100));
 
 	}
 	virtual float getExpireTime()
@@ -78,9 +84,14 @@ public:
 	}
 	virtual float getExpireFadeTime()
 	{
-		return 1.f;
+		return 2.f;
 	}
 };
+
+
+
+
+
 
 class Slime : public EnemyInfo
 {
@@ -142,6 +153,11 @@ public:
 		return 4.f;
 	}
 };
+
+
+
+
+
 
 class Goblin : public EnemyInfo
 {
@@ -205,5 +221,7 @@ public:
 		return 4.f;
 	}
 };
+
+
 
 #endif // !ENEMY_INFO_H

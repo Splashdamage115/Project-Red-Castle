@@ -20,6 +20,12 @@ struct ExplosiveRadius
     {
         body = std::make_shared<AnimatedSprite>(0.1f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\FireCircle.png"));
         body->addFrame(sf::IntRect(0, 0, 500, 500));
+        body->addFrame(sf::IntRect(500, 0, 500, 500));
+        body->addFrame(sf::IntRect(1000, 0, 500, 500));
+        body->addFrame(sf::IntRect(1500, 0, 500, 500));
+        body->addFrame(sf::IntRect(2000, 0, 500, 500));
+        body->addFrame(sf::IntRect(2500, 0, 500, 500));
+        body->addFrame(sf::IntRect(3000, 0, 500, 500));
         body->setOrigin(sf::Vector2f(body->getGlobalBounds().width / 2.f, body->getGlobalBounds().height / 2.f));
         RenderObject::getInstance().add(body);
         SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\ExplosionSound.wav");

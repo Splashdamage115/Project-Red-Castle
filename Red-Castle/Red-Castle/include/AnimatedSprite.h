@@ -21,6 +21,7 @@ public:
 	{
 		m_waitTimeBetweenFrames = t_newFrameTime;
 		m_currentFrameTime = 0.f;
+		m_selectedRegion = 0;
 	}
 	sf::FloatRect getLocalBounds() { return m_sprite.getLocalBounds(); }
 	sf::Vector2f getScale() { return m_sprite.getScale(); }

@@ -26,7 +26,7 @@ void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, sf::Vector2f t_aimPos,
 	SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\GunShot-Basic.wav");
 
 	Bullet newBullet;
-	newBullet.init(t_pawnPos, t_aimPos, moveSpeed, bulletSprite, t_spread);
+	newBullet.init(t_pawnPos, t_aimPos, moveSpeed, bulletSprite, t_spread, (rand() % 5 + 1));
 	m_bullets.push_back(newBullet);
 }
 

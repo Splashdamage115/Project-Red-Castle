@@ -90,7 +90,8 @@ public:
     void addHUD(std::shared_ptr<sf::Drawable> t_new);
     // add a new item to the background (drawn at the bottom)
     void addBG(std::shared_ptr<sf::Drawable> t_new);
-
+    // add a new Particle on the particle render layer
+    void addParticles(std::shared_ptr<sf::Drawable> t_new);
 
     // clear list of render objects
     void clear();
@@ -104,7 +105,7 @@ private:
     std::vector<std::weak_ptr< sf::Drawable >> m_hud;
     std::vector<std::weak_ptr< sf::Drawable >> m_backGround;
     std::vector<std::weak_ptr< sf::Drawable >> m_assets;
-
+    std::vector<std::weak_ptr< sf::Drawable >> m_particles;
 
     sf::RenderWindow m_window;
     sf::View m_cameraView;

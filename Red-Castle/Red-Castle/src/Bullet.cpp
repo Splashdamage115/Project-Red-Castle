@@ -7,9 +7,11 @@ Bullet::Bullet()
 {
 }
 
-void Bullet::init(sf::Vector2f t_start, sf::Vector2f t_aim, float t_bulletSpeed, std::shared_ptr<AnimatedSprite> t_body, float t_spread)
+void Bullet::init(sf::Vector2f t_start, sf::Vector2f t_aim, float t_bulletSpeed, std::shared_ptr<AnimatedSprite> t_body, float t_spread, int t_damage)
 {
     active = true;
+
+    damage = t_damage;
 
     body = t_body;
     RenderObject::getInstance().add(body);
