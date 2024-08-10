@@ -14,6 +14,8 @@ Enemy::~Enemy()
 
 void Enemy::init(EnemySetupInfo& t_type)
 {
+	m_health = t_type.health;
+	m_active = true;
 	m_moveSpeed = t_type.moveSpeed;
 
 	m_currentMove = MoveExecute::None;
@@ -26,6 +28,7 @@ void Enemy::init(EnemySetupInfo& t_type)
 
 		m_body->setScale(sf::Vector2f(0.15f, 0.15f)); // make the slime smaller
 		m_currentMove = MoveExecute::Chase;
+		m_collisionRadius = 100.f;
 		break;
 	case EnemyType::Goblin:
 		m_body = std::make_shared<AnimatedSprite>(0.25f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Goblin.png"));
@@ -33,6 +36,7 @@ void Enemy::init(EnemySetupInfo& t_type)
 
 		m_body->setScale(sf::Vector2f(0.25f, 0.25f)); // make the Goblin smaller
 		m_currentMove = MoveExecute::Chase;
+		m_collisionRadius = 100.f;
 		break;
 	default:
 		// default type is a barrel (no movement)
@@ -41,6 +45,7 @@ void Enemy::init(EnemySetupInfo& t_type)
 		m_moveSpeed = 0.f;
 
 		m_currentMove = MoveExecute::None;
+		m_collisionRadius = 100.f;
 		break;
 	}
 
@@ -60,24 +65,44 @@ void Enemy::init(EnemySetupInfo& t_type)
 
 void Enemy::update(sf::Vector2f& t_playerPos)
 {
-	// update the animation
-	m_body->update();
-	
-	switch (m_currentMove)
+	if(m_active)
 	{
-	case MoveExecute::None:
-		break;
-	case MoveExecute::Chase:
-		calculateMove(t_playerPos);
-		break;
-	case MoveExecute::Melee:
-		attackMelee();
-		break;
-	case MoveExecute::Shoot:
-		attackShoot();
-		break;
-	default:
-		break;
+		// update the animation
+		m_body->update();
+
+		switch (m_currentMove)
+		{
+		case MoveExecute::None:
+			break;
+		case MoveExecute::Chase:
+			calculateMove(t_playerPos);
+			break;
+		case MoveExecute::Melee:
+			attackMelee();
+			break;
+		case MoveExecute::Shoot:
+			attackShoot();
+			break;
+		case MoveExecute::Expire:
+			expire();
+			break;
+		case MoveExecute::ExpireFade:
+			expireFade();
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+void Enemy::applyDamage(int t_damage)
+{
+	m_health -= t_damage;
+
+	if (m_health <= 0)
+	{
+		m_currentMove = MoveExecute::Expire;
+		m_inAnimation = false;
 	}
 }
 
@@ -131,4 +156,42 @@ void Enemy::attackShoot()
 	default:
 		break;
 	}*/
+}
+
+void Enemy::expire()
+{
+	if (!m_inAnimation)
+	{
+		m_typeInfo->getExpireFrames(m_body);
+
+		// change back when exiting attack
+		m_inAnimation = true;
+		m_maxAnimTime = m_typeInfo->getExpireTime();
+		m_currentAnimTime = 0.f;
+	}
+	if (m_currentAnimTime > m_maxAnimTime)
+	{
+		m_currentMove = MoveExecute::ExpireFade;
+		m_inAnimation = false;
+	}
+	m_currentAnimTime += Game::deltaTime;
+}
+
+void Enemy::expireFade()
+{
+	if (!m_inAnimation)
+	{
+		m_typeInfo->getExpireFadeFrames(m_body);
+
+		// change back when exiting attack
+		m_inAnimation = true;
+		m_maxAnimTime = m_typeInfo->getExpireFadeTime();
+		m_currentAnimTime = 0.f;
+	}
+	if (m_currentAnimTime > m_maxAnimTime)
+	{
+		m_active = false;
+		m_body = nullptr;
+	}
+	m_currentAnimTime += Game::deltaTime;
 }

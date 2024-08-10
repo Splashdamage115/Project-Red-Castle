@@ -26,7 +26,7 @@ public:
 
 /// <Getters / Setters>
 	// returns the view so that it can be set by the window
-	sf::View& getView() { return m_view; }
+	inline sf::View& getView() { return m_view; }
 /// </Getters / Setters>
 
 private:

@@ -1,4 +1,7 @@
 #include "GamePlay.h"
+#include "ExplosiveManager.h"
+#include <ctime>
+
 
 /// <summary>
 /// default constructor
@@ -21,6 +24,8 @@ GamePlay::~GamePlay()
 void GamePlay::resetLevel()
 {
 	m_player.init(sf::Vector2f(250.f, 250.f));
+
+	srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 /// <summary>
@@ -63,8 +68,14 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	findMousePosGlobal();
+	m_bulletManager.updateBullets();
 	m_player.update();
 	m_enemyManager.update(m_player.getPos()); // enemies always chase player
+
+	m_enemyManager.checkHits(m_bulletManager.getBulets());
+	ExplosiveManager::getInstance().updateExplosions();
+	m_enemyManager.checkExplosions();
 }
 
 /// <summary>
@@ -82,6 +93,6 @@ void GamePlay::processMouse(sf::Event& t_event)
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
-		//mouseButtonUp();
+		m_bulletManager.initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
 	}
 }

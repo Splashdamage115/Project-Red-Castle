@@ -25,6 +25,8 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>✅ - logo</li>
     <li>✅ - splash screen</li>
     <li>🔷 - Sound on splash screen</li>
+    <li>🐛 - Sound overlaying other sounds (only one playing at a time)</li>
+    <li>⬜ - Go through old stuff and add comments!!!</li>
 
   </ul>
 <br><br><br>
@@ -37,6 +39,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
        <li>✅ - Completed</li>
        <li>🔷 - Under Review</li>
        <li>⬜ - Add comments</li>
+       <li>🐛 - Add comments</li>
      </ul>
     </h6>
   </em>

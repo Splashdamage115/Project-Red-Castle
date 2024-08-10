@@ -22,6 +22,7 @@ private:
 
 protected:
 	sf::Vector2f m_mousePos{ 0.0f,0.0f }; // the mouses position
+	sf::Vector2f m_mousePosGlobal{ 0.f,0.f };
 
 	// this just sets the mouse position based off the movement
 	inline void findMousePos(sf::Event& t_event) { 
@@ -29,7 +30,9 @@ protected:
 			static_cast<int>(t_event.mouseMove.x),
 			static_cast<int>(t_event.mouseMove.y)));
 	}
-
+	inline void findMousePosGlobal() {
+		m_mousePosGlobal = RenderObject::getInstance().getWindow().mapPixelToCoords(sf::Mouse::getPosition(RenderObject::getInstance().getWindow()), RenderObject::getInstance().getCameraView());
+	}
 };
 
 #endif // !GAMEMODE_H

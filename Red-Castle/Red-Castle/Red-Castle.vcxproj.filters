@@ -64,6 +64,9 @@
     <Filter Include="Header Files\Not Current\Menu">
       <UniqueIdentifier>{45a9bb18-667e-449e-bbe6-1188361c0abe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\CollisionLibrary">
+      <UniqueIdentifier>{37a5827b-7c69-454f-87f5-7c9bb9f90e29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -110,6 +113,18 @@
     </ClCompile>
     <ClCompile Include="src\SplashScreen.cpp">
       <Filter>Source Files\Not Current\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bullet.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BulletManager.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CollisionDetector.cpp">
+      <Filter>Resource Files\CollisionLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExplosiveManager.cpp">
+      <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +312,18 @@
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\SoundPlayer.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Bullet.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BulletManager.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CollisionDetector.h">
+      <Filter>Resource Files\CollisionLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ExplosiveManager.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

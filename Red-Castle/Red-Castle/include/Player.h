@@ -15,7 +15,7 @@ public:
 
 	void update(); 
 	
-	sf::Vector2f getPos() { return m_body->getPosition(); } // return the players position
+	inline sf::Vector2f getPos() { return m_body->getPosition(); } // return the players position
 
 
 private:

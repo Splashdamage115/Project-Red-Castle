@@ -53,6 +53,33 @@ public:
         }
     }
 
+    void playNewOverlapable(std::string t_soundLocation)
+    {
+        if (m_buffer.size() < 255)
+        {
+            m_locations.push_back(t_soundLocation);
+            m_buffer.emplace_back();
+            if (!m_buffer.back().loadFromFile(t_soundLocation))
+            {
+                DEBUG_MSG("Couldnt find sound: ");
+                DEBUG_MSG(t_soundLocation);
+                return;
+            }
+            m_sounds.emplace_back();
+            m_sounds.back().setBuffer(m_buffer.back());
+            m_sounds.back().play();
+            return;
+
+        }
+        else
+        {
+            for (unsigned int i = 0; i < m_sounds.size(); i++)
+            {
+                
+            }
+        }
+    }
+
 private:
 	SoundPlayer() {}
     std::vector<sf::Sound> m_sounds;
