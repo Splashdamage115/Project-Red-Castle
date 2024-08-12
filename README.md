@@ -24,14 +24,24 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔷 - Sound on splash screen</li>
     <li>🐛 - Sound overlaying other sounds (only one playing at a time)</li>
     <li>⬜ - Go through old stuff and add comments!!!</li>
-    <li>🔴 - Enemy hit -1 damage pop up</li>
+    <li>✅ - Enemy hit -1 damage pop up (NOTE : MAY BE LAGGY)</li>
     <li>🔴 - Enemy drop system</li>
     <li>🔴 - Wave system</li>
     <li>🔴 - player health</li>
     <li>🔴 - Player body extract</li>
     <li>🔴 - doctor buff</li>
     <li>🔴 - Droppable power ups</li>
-    <li>🔴 - Guns</li>
+    <li>🟡 - Guns</li>
+        <li>     - Bullet stockpiles</li>
+        <li>     - Reloading</li>
+        <li>     - Magazines</li>
+        <li>     - switching</li>
+        <li>     - Names</li>
+        <li>     - Texture</li>
+        <li>     - bullet position adjustments</li>
+        <li>     - hud ammo</li>
+        <li>     - hud name</li>
+        <li>     - hud mini Icon</li>
     <li>🔴 - buyable power buffs</li>
     <li>🔴 - armour system player health</li>
     <li>🔴 - Enemy shield</li>
