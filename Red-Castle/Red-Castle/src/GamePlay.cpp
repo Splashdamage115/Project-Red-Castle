@@ -2,6 +2,7 @@
 #include "ExplosiveManager.h"
 #include "Particles.h"
 #include <ctime>
+#include "BulletManager.h"
 
 
 /// <summary>
@@ -70,12 +71,13 @@ void GamePlay::processKeys(sf::Event& t_event)
 void GamePlay::update()
 {
 	findMousePosGlobal(); // mouse in the world
+	m_player.setAimVector(m_mousePosGlobal);
 	ParticleSystem::getInstance().update();
-	m_bulletManager.updateBullets();
+	BulletManager::getInstance().updateBullets();
 	m_player.update();
 	m_enemyManager.update(m_player.getPos()); // enemies always chase player
 
-	m_enemyManager.checkHits(m_bulletManager.getBulets());
+	m_enemyManager.checkHits();
 	ExplosiveManager::getInstance().updateExplosions();
 	m_enemyManager.checkExplosions();
 }
@@ -91,10 +93,11 @@ void GamePlay::processMouse(sf::Event& t_event)
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
-		//mouseButtonDown();
+		m_player.setMouse(true);
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
-		m_bulletManager.initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
+		m_player.setMouse(false);
+		//BulletManager::getInstance().initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
 	}
 }

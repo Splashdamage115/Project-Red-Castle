@@ -191,7 +191,8 @@ void Enemy::expireFade()
 	if (m_currentAnimTime > m_maxAnimTime)
 	{
 		m_active = false;
-		m_body = nullptr;
+		m_body->setActive(false);
+		m_body->setPosition(sf::Vector2f(-100000.f, -100000.f));
 	}
 	m_currentAnimTime += Game::deltaTime;
 }

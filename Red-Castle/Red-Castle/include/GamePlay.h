@@ -7,6 +7,7 @@
 #include "EnemyManager.h"
 #include "Player.h"
 #include "BulletManager.h"
+#include "GunManager.h"
 
 class GamePlay : public GameMode
 {
@@ -23,7 +24,6 @@ private:
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
 	EnemyManager m_enemyManager;
-	BulletManager m_bulletManager;
 	Player m_player;
 };
 

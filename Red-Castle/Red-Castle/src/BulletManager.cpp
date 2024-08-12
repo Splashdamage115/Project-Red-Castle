@@ -1,16 +1,16 @@
 #include "BulletManager.h"
 #include "TextureLoader.h"
-#include "SoundPlayer.h"
+
 
 BulletManager::BulletManager()
 {
 }
 
 // implement spread here somehow
-void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, sf::Vector2f t_aimPos, float t_spread)
+void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, float t_angle, float t_timeAlive, int t_damage, float t_speed, float t_explosiveRadius)
 {
 	// implement check if any bullets are available to be pushed back into
-	float moveSpeed = 1000.f;
+	float moveSpeed = t_speed;
 
 	std::shared_ptr<AnimatedSprite> bulletSprite;
 	
@@ -23,10 +23,15 @@ void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, sf::Vector2f t_aimPos,
 	bulletSprite->addFrame(sf::IntRect(48, 0, 16, 16));
 	bulletSprite->addFrame(sf::IntRect(64, 0, 16, 16));
 
-	SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\GunShot-Basic.wav");
+	for(auto& i : m_bullets)
+		if (!i.active)
+		{
+			i.init(t_pawnPos, t_angle, moveSpeed, bulletSprite, t_damage, t_timeAlive, t_explosiveRadius);
+			return;
+		}
 
 	Bullet newBullet;
-	newBullet.init(t_pawnPos, t_aimPos, moveSpeed, bulletSprite, t_spread, (rand() % 5 + 1));
+	newBullet.init(t_pawnPos, t_angle, moveSpeed, bulletSprite, t_damage, t_timeAlive, t_explosiveRadius);
 	m_bullets.push_back(newBullet);
 }
 

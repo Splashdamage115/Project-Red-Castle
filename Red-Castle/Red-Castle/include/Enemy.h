@@ -77,7 +77,7 @@ private:
 	int m_health{ 10 };						// health == 0 moves enemy to death
 	float m_moveSpeed{ 0.f };               // distance the enemy moves at every second (pixels)
 	bool m_active{ false };                 // for speed checks and pointer checks
-	float m_collisionRadius{ 100.f };       // distance to check collisions in
+	float m_collisionRadius{ 30.f };       // distance to check collisions in
 };
 
 #endif // !ENEMY_H

@@ -4,6 +4,7 @@
 #include "simpleMaths.h"
 #include "SoundPlayer.h"
 #include "Particles.h"
+#include "BulletManager.h"
 
 EnemyManager::EnemyManager()
 {
@@ -42,12 +43,22 @@ void EnemyManager::update(sf::Vector2f& t_playerPos)
 }
 
 // check if collidiing with any bullet
-void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
+void EnemyManager::checkHits()
 {
+	std::vector<Bullet>t_bullets = BulletManager::getInstance().getBullets();
+
 	for (unsigned int bullet = 0; bullet < t_bullets.size(); bullet++)
 	{
 		if (!t_bullets.at(bullet).active)
+		{
+			//DEBUG_MSG("body inactive");
 			continue;
+		}
+		if (t_bullets.at(bullet).body == nullptr)
+		{
+			//DEBUG_MSG("body NULL");
+			continue;
+		}
 
 		for (unsigned int enemy = 0; enemy < m_enemies.size(); enemy++)
 		{
@@ -55,11 +66,15 @@ void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
 				continue;
 			if(!m_enemies.at(enemy).canApplyDamage())
 				continue;
+			if (m_enemies.at(enemy).getSprite().getTexture()->getSize().x <= 0)
+				continue;
+			if (m_enemies.at(enemy).getSprite().getTexture()->getSize().y <= 0)
+				continue;
 
 			if (m_enemies.at(enemy).getBounds().intersects(t_bullets.at(bullet).body->getGlobalBounds()))
 			{
-				if (CollisionDetector::pixelPerfectTest(m_enemies.at(enemy).getSprite(), t_bullets.at(bullet).body->getSprite()))
-				{
+				//if (CollisionDetector::pixelPerfectTest(m_enemies.at(enemy).getSprite(), t_bullets.at(bullet).body->getSprite()))
+				//{
 					SoundPlayer::getInstance().playNewSound("ASSETS\\SOUNDS\\ShotHit-basic.wav");
 					m_enemies.at(enemy).applyDamage(t_bullets.at(bullet).damage);
 
@@ -67,9 +82,10 @@ void EnemyManager::checkHits(std::vector<Bullet>& t_bullets)
 
 					t_bullets.at(bullet).deactivate();
 					break;
-				}
+				//}
 			}
 		}
+
 	}
 }
 

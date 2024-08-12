@@ -14,7 +14,7 @@ public:
 
 	void update(sf::Vector2f& t_playerPos);
 
-	void checkHits(std::vector<Bullet>& t_bullets);
+	void checkHits();
 	void checkExplosions();
 private:
 	std::vector<Enemy> m_enemies; // vector of all enemies

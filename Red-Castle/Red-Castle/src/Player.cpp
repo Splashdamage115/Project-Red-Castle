@@ -13,6 +13,8 @@ Player::~Player()
 
 void Player::init(sf::Vector2f t_position)
 {
+	m_active = true;
+
 	// initialise body
 	m_body = std::make_shared<AnimatedSprite>(0.1f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Player.png"));
 	m_body->addFrame(sf::IntRect(0, 0, 186, 291));
@@ -41,24 +43,28 @@ void Player::init(sf::Vector2f t_position)
 
 void Player::update()
 {
-	// move player based on input type (can be used to set up controller input)
-	sf::Vector2f playerMove = m_input->calculateDisplacement() * m_speed * Game::deltaTime;
-	m_body->move(playerMove);
-
-	// update player animation frames
-	if(playerMove.x != 0.f || playerMove.y != 0.f)
-		m_body->update();
-
-	// flip the character depending on movement
-	if (playerMove.x > 0.f)
+	if(m_active)
 	{
-		m_body->setScale(sf::Vector2f(-std::abs(m_body->getScale().x), m_body->getScale().y));
-	}
-	else if (playerMove.x < 0.f)
-	{
-		m_body->setScale(sf::Vector2f(std::abs(m_body->getScale().x), m_body->getScale().y));
-	}
+		m_equippedWeapon.update();
+		// move player based on input type (can be used to set up controller input)
+		sf::Vector2f playerMove = m_input->calculateDisplacement() * m_speed * Game::deltaTime;
+		m_body->move(playerMove);
 
-	// set camera to follow player position
-	m_followCam.update(m_body->getPosition());
+		// update player animation frames
+		if (playerMove.x != 0.f || playerMove.y != 0.f)
+			m_body->update();
+
+		// flip the character depending on movement
+		if (playerMove.x > 0.f)
+		{
+			m_body->setScale(sf::Vector2f(-std::abs(m_body->getScale().x), m_body->getScale().y));
+		}
+		else if (playerMove.x < 0.f)
+		{
+			m_body->setScale(sf::Vector2f(std::abs(m_body->getScale().x), m_body->getScale().y));
+		}
+
+		// set camera to follow player position
+		m_followCam.update(m_body->getPosition());
+	}
 }

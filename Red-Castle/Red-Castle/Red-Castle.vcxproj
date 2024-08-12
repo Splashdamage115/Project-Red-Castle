@@ -31,6 +31,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
+    <ClCompile Include="src\GunManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Particles.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="include\GamePlay.h" />
     <ClInclude Include="include\GlobalFontStorage.h" />
     <ClInclude Include="include\Globals.h" />
+    <ClInclude Include="include\GunManager.h" />
     <ClInclude Include="include\InputSwitcher.hpp" />
     <ClInclude Include="include\Library.h" />
     <ClInclude Include="include\Menu.h" />
@@ -70,6 +72,7 @@
     <ClInclude Include="include\SoundPlayer.h" />
     <ClInclude Include="include\SplashScreen.h" />
     <ClInclude Include="include\TextureLoader.h" />
+    <ClInclude Include="include\Weapons.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />
     <ClInclude Include="include\yaml-cpp\contrib\anchordict.h" />

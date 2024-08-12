@@ -11,9 +11,11 @@ public:
 	std::shared_ptr<AnimatedSprite> body;
 	sf::Vector2f displacement{ 0.f,0.f };
 	int damage{ 1 };
+	float lifeTime{ 3.f };
+	float explosiveRadius{ -1.f };
 
 	Bullet();
-	void init(sf::Vector2f t_start, sf::Vector2f t_aim, float t_bulletSpeed, std::shared_ptr<AnimatedSprite> t_body, float t_spread, int t_damage);
+	void init(sf::Vector2f t_start, float t_angle, float t_bulletSpeed, std::shared_ptr<AnimatedSprite> t_body, int t_damage, float t_timeAlive, float t_explosiveRadius = -1.f);
 	void update();
 	sf::Vector2f getPos();
 	void deactivate();
