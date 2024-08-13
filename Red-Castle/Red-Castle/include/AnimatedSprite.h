@@ -25,6 +25,7 @@ public:
 	}
 	sf::FloatRect getLocalBounds() { return m_sprite.getLocalBounds(); }
 	sf::Vector2f getScale() { return m_sprite.getScale(); }
+	sf::Vector2f getOrigin() { return m_sprite.getOrigin(); }
 	void setTexture(sf::Texture& t_newTexture)
 	{
 		m_sprite.setTexture(t_newTexture);

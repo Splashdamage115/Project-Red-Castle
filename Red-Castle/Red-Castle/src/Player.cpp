@@ -68,3 +68,11 @@ void Player::update()
 		m_followCam.update(m_body->getPosition());
 	}
 }
+
+void Player::buttonReleased(sf::Keyboard::Key t_keyReleased)
+{
+	if (t_keyReleased == sf::Keyboard::R)
+	{
+		m_equippedWeapon.reload();
+	}
+}

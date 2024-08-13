@@ -23,10 +23,10 @@ void Bullet::init(sf::Vector2f t_start, float t_angle, float t_bulletSpeed, std:
 
     displacement = math::degreesToDisplacement(t_angle) * t_bulletSpeed;
 
-    body->setRotation(t_angle + 90.f); // 90.f to compensate for the sprite
+    body->setOrigin(sf::Vector2f(body->getGlobalBounds().width / 2.f, 0.f));
+    body->setRotation(t_angle - 90.f); // 90.f to compensate for the sprite
     body->setScale(sf::Vector2f(3.f, 3.f));
     body->setPosition(t_start);
-   // body->setOrigin(sf::Vector2f(body->getGlobalBounds().width / 2.f , body->getGlobalBounds().height / 2.f) * 3.f);
 }
 
 void Bullet::update()

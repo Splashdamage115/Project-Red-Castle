@@ -27,6 +27,10 @@ void GamePlay::resetLevel()
 {
 	m_player.init(sf::Vector2f(250.f, 250.f));
 
+	m_purchasables.initNewWeapon(sf::Vector2f(-200.f, 0.f), std::make_shared<BasicSMG>());
+	m_purchasables.initNewWeapon(sf::Vector2f(1200.f, 100.f), std::make_shared<BasicPistol>());
+	m_purchasables.initNewWeapon(sf::Vector2f(600.f, 1100.f), std::make_shared<BasicShotgun>());
+
 	srand(static_cast<unsigned int>(time(nullptr)));
 }
 
@@ -62,6 +66,16 @@ void GamePlay::processKeys(sf::Event& t_event)
 		enemyInfo.spawnPos = sf::Vector2f(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT);
 		m_enemyManager.spawnNewEnemy(enemyInfo);
 	}
+	if (t_event.key.code == sf::Keyboard::F)
+	{
+		std::shared_ptr<GunBasic> newWeapon = m_purchasables.tryPurchase();
+		if(newWeapon != nullptr)
+			m_player.buyNewGun(newWeapon);
+	}
+	if (sf::Event::KeyReleased == t_event.type)
+	{
+		m_player.buttonReleased(t_event.key.code);
+	}
 }
 
 /// <summary>
@@ -80,6 +94,7 @@ void GamePlay::update()
 	m_enemyManager.checkHits();
 	ExplosiveManager::getInstance().updateExplosions();
 	m_enemyManager.checkExplosions();
+	m_purchasables.checkCollisions(m_player.getBounds());
 }
 
 /// <summary>

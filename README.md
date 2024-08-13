@@ -31,15 +31,16 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔴 - Player body extract</li>
     <li>🔴 - doctor buff</li>
     <li>🔴 - Droppable power ups</li>
+    <li>🔴 - Enemy effects (and for weapons) (poison, ice, fire etc)</li>
     <li>🟡 - Guns</li>
-        <li>     - Bullet stockpiles</li>
-        <li>     - Reloading</li>
-        <li>     - Magazines</li>
+        <li>     - Bullet stockpiles✅</li>
+        <li>     - Reloading✅</li>
+        <li>     - Magazines✅</li>
         <li>     - switching</li>
         <li>     - Names</li>
-        <li>     - Texture</li>
-        <li>     - bullet position adjustments</li>
-        <li>     - hud ammo</li>
+        <li>     - Texture✅</li>
+        <li>     - bullet position adjustments ✅</li>
+        <li>     - hud ammo✅</li>
         <li>     - hud name</li>
         <li>     - hud mini Icon</li>
     <li>🔴 - buyable power buffs</li>

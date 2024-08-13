@@ -132,11 +132,17 @@
     <ClCompile Include="src\EnemyManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Particles.cpp">
-      <Filter>Source Files\Not Current\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\ExplosiveManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PurchasableManager.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Purchasables.cpp">
+      <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -338,13 +344,19 @@
     <ClInclude Include="include\InputSwitcher.hpp">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="include\Particles.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\SoundPlayer.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\Weapons.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particles.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PurchasableManager.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Purchasables.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

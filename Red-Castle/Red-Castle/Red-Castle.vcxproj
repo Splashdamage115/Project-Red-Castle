@@ -36,6 +36,8 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Particles.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\PurchasableManager.cpp" />
+    <ClCompile Include="src\Purchasables.cpp" />
     <ClCompile Include="src\RenderObject.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\SplashScreen.cpp" />
@@ -64,6 +66,8 @@
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\PurchasableManager.h" />
+    <ClInclude Include="include\Purchasables.h" />
     <ClInclude Include="include\RenderObject.h" />
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\SettingsStorage.h" />

@@ -19,8 +19,11 @@ public:
 	inline sf::Vector2f getPos() { return m_body->getPosition(); } // return the players position
 
 	void setMouse(bool t_) { m_mouseDown = t_; m_equippedWeapon.setMouse(t_); }
+	void buttonReleased(sf::Keyboard::Key t_keyReleased);
+	void buyNewGun(std::shared_ptr<GunBasic> t_newGun) { m_equippedWeapon.equipNewGun(t_newGun); }
 
 	void setAimVector(sf::Vector2f& t_aimToFollow) { m_equippedWeapon.setPositioning(m_body->getPosition(), t_aimToFollow); }
+	sf::FloatRect getBounds() { return m_body->getGlobalBounds(); }
 private:
 	std::shared_ptr<AnimatedSprite> m_body; // animated body sprite of the player
 	std::shared_ptr<InputBasic> m_input;    // input type used by the player
