@@ -10,7 +10,7 @@
 
 GunManager::GunManager()
 {
-	equipNewGun(std::make_shared<BasicSMG>());
+	equipNewGun(std::make_shared<BasicShotgun>());
 }
 
 void GunManager::equipNewGun(std::shared_ptr<GunBasic> t_newGun)
@@ -45,6 +45,11 @@ void GunManager::setPositioning(sf::Vector2f& t_startLocation, sf::Vector2f& t_a
 
 	sf::Vector2f displacement = math::displacement(m_position, m_aim);
 	float moveAngle = math::displacementToDegrees(displacement);
+
+	if (m_reloading)
+		moveAngle = (m_shootCooldownRemaining) * 360.f + m_startReloadAngle;
+	else
+		m_startReloadAngle = moveAngle;
 
 	m_weaponBody->setPosition(m_position);
 	m_weaponBody->setRotation(moveAngle);

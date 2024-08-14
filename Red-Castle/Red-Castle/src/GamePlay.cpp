@@ -3,6 +3,7 @@
 #include "Particles.h"
 #include <ctime>
 #include "BulletManager.h"
+#include "EnemyDrops.h"
 
 
 /// <summary>
@@ -30,6 +31,7 @@ void GamePlay::resetLevel()
 	m_purchasables.initNewWeapon(sf::Vector2f(-200.f, 0.f), std::make_shared<BasicSMG>());
 	m_purchasables.initNewWeapon(sf::Vector2f(1200.f, 100.f), std::make_shared<BasicPistol>());
 	m_purchasables.initNewWeapon(sf::Vector2f(600.f, 1100.f), std::make_shared<BasicShotgun>());
+	m_purchasables.initNewWeapon(sf::Vector2f(400.f, -200.f), std::make_shared <BasicLMG>());
 
 	srand(static_cast<unsigned int>(time(nullptr)));
 }
@@ -95,6 +97,7 @@ void GamePlay::update()
 	ExplosiveManager::getInstance().updateExplosions();
 	m_enemyManager.checkExplosions();
 	m_purchasables.checkCollisions(m_player.getBounds());
+	DropManager::getInstance().update(m_player);
 }
 
 /// <summary>

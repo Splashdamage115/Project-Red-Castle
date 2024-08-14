@@ -99,9 +99,6 @@
     <ClCompile Include="src\YamlLoader.cpp">
       <Filter>Source Files\Not Current\Settings</Filter>
     </ClCompile>
-    <ClCompile Include="src\GamePlay.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\AnimatedSprite.cpp">
       <Filter>Source Files\Not Current\Gloabals</Filter>
     </ClCompile>
@@ -111,37 +108,43 @@
     <ClCompile Include="src\SplashScreen.cpp">
       <Filter>Source Files\Not Current\GameMode</Filter>
     </ClCompile>
-    <ClCompile Include="src\Bullet.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
-    <ClCompile Include="src\BulletManager.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\CollisionDetector.cpp">
       <Filter>Resource Files\CollisionLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="src\GunManager.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\cameraTracker.cpp">
-      <Filter>Source Files\Not Current\GamePlay</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Enemy.cpp">
-      <Filter>Source Files\Not Current\GamePlay</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EnemyManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
     <ClCompile Include="src\ExplosiveManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Particles.cpp">
-      <Filter>Source Files\GamePlay</Filter>
+    <ClCompile Include="src\Purchasables.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
     <ClCompile Include="src\PurchasableManager.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GunManager.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BulletManager.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Bullet.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Purchasables.cpp">
+    <ClCompile Include="src\EnemyManager.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GamePlay.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyDrops.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
@@ -314,28 +317,10 @@
     <ClInclude Include="include\SplashScreen.h">
       <Filter>Header Files\Not Current\GameMode</Filter>
     </ClInclude>
-    <ClInclude Include="include\Bullet.h">
-      <Filter>Header Files\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BulletManager.h">
-      <Filter>Header Files\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\CollisionDetector.h">
       <Filter>Resource Files\CollisionLibrary</Filter>
     </ClInclude>
-    <ClInclude Include="include\GunManager.h">
-      <Filter>Header Files\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\cameraTracker.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Enemy.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EnemyInfo.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EnemyManager.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\ExplosiveManager.h">
@@ -347,16 +332,37 @@
     <ClInclude Include="include\SoundPlayer.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="include\Weapons.h">
-      <Filter>Header Files\GamePlay</Filter>
+    <ClInclude Include="include\Bullet.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BulletManager.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GunManager.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\Particles.h">
-      <Filter>Header Files\GamePlay</Filter>
+      <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\PurchasableManager.h">
-      <Filter>Header Files\GamePlay</Filter>
+      <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\Purchasables.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Weapons.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyInfo.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyManager.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyDrops.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

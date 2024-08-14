@@ -59,6 +59,9 @@ public:
 	sf::Vector2f getPosition() { return m_sprite.getPosition(); }
 	sf::FloatRect getGlobalBounds() { return m_sprite.getGlobalBounds(); }
 	sf::Sprite getSprite() { return m_sprite; }
+	void jumpToFrame(int t_frame) { if (t_frame < static_cast<int>(m_renderRegions.size())) m_selectedRegion = t_frame; }
+	void jumpToRandomFrame() { m_selectedRegion = rand() % m_renderRegions.size(); }
+
 private:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;

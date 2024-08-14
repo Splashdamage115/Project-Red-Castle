@@ -24,6 +24,8 @@ public:
 
 	void setAimVector(sf::Vector2f& t_aimToFollow) { m_equippedWeapon.setPositioning(m_body->getPosition(), t_aimToFollow); }
 	sf::FloatRect getBounds() { return m_body->getGlobalBounds(); }
+
+	void recieveXp(int t_xpAmt);
 private:
 	std::shared_ptr<AnimatedSprite> m_body; // animated body sprite of the player
 	std::shared_ptr<InputBasic> m_input;    // input type used by the player
@@ -33,6 +35,9 @@ private:
 	bool m_mouseDown{ false };
 
 	GunManager m_equippedWeapon;
+
+	int m_xpLvl{ 0 };
+	std::shared_ptr<sf::Text> m_xpText;
 };
 
 #endif // !PLAYER_H

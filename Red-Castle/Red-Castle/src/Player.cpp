@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "TextureLoader.h"
 #include "RenderObject.h"
+#include "GlobalFontStorage.h"
 
 Player::Player()
 {
@@ -26,6 +27,15 @@ void Player::init(sf::Vector2f t_position)
 	m_body->addFrame(sf::IntRect(186 * 6, 0, 186, 291));
 	m_body->setScale(sf::Vector2f(0.25f, 0.25f));
 	RenderObject::getInstance().add(m_body);
+
+	// initialise XP amt
+	m_xpText = std::make_shared<sf::Text>();
+	m_xpText->setFont(*GlobalFontStorage::getInstance().getFont());
+	m_xpText->setCharacterSize(24u);
+	m_xpText->setString(std::to_string(m_xpLvl));
+	m_xpText->setPosition(sf::Vector2f(0.f, 30.f));
+
+	RenderObject::getInstance().addHUD(m_xpText);
 
 	// set origin
 	sf::Vector2f playerMidPos = sf::Vector2f(m_body->getLocalBounds().width / 2.f, m_body->getLocalBounds().height / 2.f);
@@ -75,4 +85,10 @@ void Player::buttonReleased(sf::Keyboard::Key t_keyReleased)
 	{
 		m_equippedWeapon.reload();
 	}
+}
+
+void Player::recieveXp(int t_xpAmt)
+{
+	m_xpLvl += t_xpAmt;
+	m_xpText->setString(std::to_string(m_xpLvl));
 }

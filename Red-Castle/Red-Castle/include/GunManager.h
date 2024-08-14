@@ -39,6 +39,7 @@ private:
 	int m_stockpile{ 0 };
 	int m_magazine{ 0 };
 	int m_magazineMax{ 0 };
+	float m_startReloadAngle{ 0.f };
 };
 
 #endif // !GUN_MANAGER_H

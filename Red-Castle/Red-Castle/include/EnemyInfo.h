@@ -4,6 +4,7 @@
 #include "AnimatedSprite.h"
 #include "TextureLoader.h"
 #include "ExplosiveManager.h"
+#include "EnemyDrops.h"
 
 class EnemyInfo
 {
@@ -133,6 +134,8 @@ public:
 		t_body->addFrame(sf::IntRect(600, 600, 300, 300));
 		t_body->addFrame(sf::IntRect(900, 600, 300, 300));
 		t_body->addFrame(sf::IntRect(1200, 600, 300, 300));
+
+		DropManager::getInstance().initNewDrops(rand() % 30, t_body->getPosition());
 	}
 	virtual void getExpireFadeFrames(std::shared_ptr<AnimatedSprite> t_body)
 	{
@@ -201,6 +204,8 @@ public:
 		t_body->addFrame(sf::IntRect(900, 900, 300, 300));
 		t_body->addFrame(sf::IntRect(1200, 900, 300, 300));
 		t_body->addFrame(sf::IntRect(0   , 1200, 300, 300));
+
+		DropManager::getInstance().initNewDrops(rand() % 30, t_body->getPosition());
 	}
 	virtual void getExpireFadeFrames(std::shared_ptr<AnimatedSprite> t_body)
 	{
@@ -211,6 +216,7 @@ public:
 		t_body->addFrame(sf::IntRect(600, 1500, 300, 300));
 		t_body->addFrame(sf::IntRect(900, 1500, 300, 300));
 		t_body->addFrame(sf::IntRect(1200, 1800, 300, 300));
+		t_body->addFrame(sf::IntRect(0, 2100, 300, 300));
 	}
 	virtual float getExpireTime()
 	{

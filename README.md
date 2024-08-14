@@ -43,6 +43,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
         <li>     - hud ammo✅</li>
         <li>     - hud name</li>
         <li>     - hud mini Icon</li>
+    <li>🟡 - Buyable Weapons</li>
     <li>🔴 - buyable power buffs</li>
     <li>🔴 - armour system player health</li>
     <li>🔴 - Enemy shield</li>
