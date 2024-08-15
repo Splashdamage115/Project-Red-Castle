@@ -75,6 +75,7 @@ void RenderObject::clear()
 	m_backGround.clear();
 	m_assets.clear();
 	m_hud.clear();
+	m_particles.clear();
 }
 ////////////////////////////////////////////////
 

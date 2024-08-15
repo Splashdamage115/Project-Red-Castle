@@ -34,12 +34,17 @@ void GunManager::equipNewGun(std::shared_ptr<GunBasic> t_newGun)
 	m_magazineText->setFont(*GlobalFontStorage::getInstance().getFont());
 	m_magazineText->setCharacterSize(24u);
 	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+	m_magazineText->setPosition(30.f, 30.f);
+
 
 	RenderObject::getInstance().addHUD(m_magazineText);
 }
 
 void GunManager::setPositioning(sf::Vector2f& t_startLocation, sf::Vector2f& t_aim)
 {
+	if (!m_active)
+		return;
+
 	m_position = t_startLocation;
 	m_aim = t_aim;
 
@@ -64,6 +69,9 @@ void GunManager::setPositioning(sf::Vector2f& t_startLocation, sf::Vector2f& t_a
 
 void GunManager::update()
 {
+	if (!m_active)
+		return;
+
 	m_weaponBody->update();
 
 	if(m_reloading)
@@ -93,16 +101,19 @@ void GunManager::update()
 
 void GunManager::setMouse(bool t_newMouse) 
 { 
-	m_mouseDown = t_newMouse;
-	if(m_mouseDown == false)
+	if(m_active)
 	{
-		if(!m_currentWeapon->fullAuto())
+		m_mouseDown = t_newMouse;
+		if (m_mouseDown == false)
 		{
-			if (m_shootCooldownRemaining <= 0.f)
+			if (!m_currentWeapon->fullAuto())
 			{
-				if(m_magazine > 0)
+				if (m_shootCooldownRemaining <= 0.f)
 				{
-					spawnBullet();
+					if (m_magazine > 0)
+					{
+						spawnBullet();
+					}
 				}
 			}
 		}
@@ -111,12 +122,15 @@ void GunManager::setMouse(bool t_newMouse)
 
 void GunManager::reload()
 {
-	if(m_magazine < m_magazineMax && m_stockpile > 0)
+	if(!m_reloading)
 	{
-		m_shootCooldownRemaining = m_reloadTime;
-		m_reloading = true;
-		m_stockpile += m_magazine;
-		m_magazine = 0;
+		if (m_magazine < m_magazineMax && m_stockpile > 0)
+		{
+			m_shootCooldownRemaining = m_reloadTime;
+			m_reloading = true;
+			m_stockpile += m_magazine;
+			m_magazine = 0;
+		}
 	}
 }
 
@@ -136,6 +150,15 @@ void GunManager::reloadWeaponToMax()
 	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 }
 
+void GunManager::purchaseAmmoRefill()
+{
+	m_reloading = false;
+	m_shootCooldownRemaining = 0.f;
+	m_stockpile = m_stockpileMax;
+	m_magazine = m_magazineMax;
+	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+}
+
 bool GunManager::refillWeapon()
 {
 	if (m_stockpile < m_stockpileMax)
@@ -146,8 +169,17 @@ bool GunManager::refillWeapon()
 	return false;
 }
 
+void GunManager::deactivateWeapon()
+{
+	m_weaponBody = nullptr;
+	m_active = false;
+}
+
 void GunManager::spawnBullet()
 {
+	if (!m_active)
+		return;
+
 	m_shootCooldownRemaining = m_shootCooldownMax; // reset shot cooldown
 	m_magazine--; m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 

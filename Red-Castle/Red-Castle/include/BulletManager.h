@@ -17,12 +17,15 @@ public:
 
 
 	void initNewBullet(sf::Vector2f t_pawnPos, float t_angle, float t_timeAlive, int t_damage, float t_speed, float t_explosiveRadius);
+	void initNewEnemyBullet(sf::Vector2f t_pawnPos, float t_angle, float t_timeAlive, int t_damage, float t_speed, float t_explosiveRadius);
 	void updateBullets();
 
 	inline std::vector<Bullet>& getBullets() { return m_bullets; }
+	inline std::vector<Bullet>& getBulletsEnemy() { return m_bulletsEnemy; }
 private:
 	BulletManager();
 	std::vector<Bullet> m_bullets;
+	std::vector<Bullet> m_bulletsEnemy;
 };
 
 #endif // !BULLET_MANAGER_H

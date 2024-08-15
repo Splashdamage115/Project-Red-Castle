@@ -68,6 +68,7 @@
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\PlayerDamageApplicator.h" />
     <ClInclude Include="include\PurchasableManager.h" />
     <ClInclude Include="include\Purchasables.h" />
     <ClInclude Include="include\RenderObject.h" />

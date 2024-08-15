@@ -3,6 +3,7 @@
 #include "RenderObject.h"
 #include "simpleMaths.h"
 #include "Game.h"
+#include "BulletManager.h"
 
 Enemy::Enemy()
 {
@@ -49,6 +50,15 @@ void Enemy::init(EnemySetupInfo& t_type)
 		break;
 	}
 
+	m_stabBox = std::make_shared<sf::RectangleShape>();
+	m_stabBox->setSize(sf::Vector2f(50.f, 50.f));
+	m_stabBox->setOrigin(sf::Vector2f(60.f,25.f) - sf::Vector2f(m_body->getLocalBounds().width / 2.f, m_body->getLocalBounds().height / 2.f));
+	m_stabBox->setPosition(m_body->getPosition());
+	m_stabBox->setFillColor(sf::Color::Transparent);
+	m_stabBox->setOutlineColor(sf::Color::White);
+	m_stabBox->setOutlineThickness(1.f);
+	// RenderObject::getInstance().add(m_stabBox);
+
 	m_typeInfo->getMoveFrames(m_body);
 
 	//m_enemyType = t_type.enemyType;
@@ -81,7 +91,7 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 			attackMelee();
 			break;
 		case MoveExecute::Shoot:
-			attackShoot();
+			attackShoot(t_playerPos);
 			break;
 		case MoveExecute::Expire:
 			expire();
@@ -106,21 +116,36 @@ void Enemy::applyDamage(int t_damage)
 	}
 }
 
+sf::FloatRect Enemy::getdamageBox()
+{
+	if(m_currentMove == MoveExecute::Melee)
+	{
+		if (m_typeInfo->getStabFrame(m_body))
+		{
+			return m_stabBox->getGlobalBounds();
+		}
+	}
+	return sf::FloatRect(-1000000.f, -10000000.f, 0.f, 0.f);
+}
+
 // different Execute move types
 void Enemy::calculateMove(sf::Vector2f& t_playerPos)
 {
 	// move enemy towards player
 	sf::Vector2f enemyMove = math::displacement(m_body->getPosition(), t_playerPos) * m_moveSpeed * Game::deltaTime;
 	m_body->move(enemyMove);
+	m_stabBox->setPosition(m_body->getPosition());
 
 	// flip the character depending on movement
 	if (enemyMove.x > 0.f)
 	{
 		m_body->setScale(sf::Vector2f(-std::abs(m_body->getScale().x), m_body->getScale().y));
+		m_stabBox->setOrigin(sf::Vector2f(0.f, 25.f));
 	}
 	else if (enemyMove.x < 0.f)
 	{
 		m_body->setScale(sf::Vector2f(std::abs(m_body->getScale().x), m_body->getScale().y));
+		m_stabBox->setOrigin(sf::Vector2f(60.f, 25.f));
 	}
 
 	if (math::distance(m_body->getPosition(), t_playerPos) <= m_typeInfo->getMeleeRadius())
@@ -149,13 +174,30 @@ void Enemy::attackMelee()
 	m_currentAnimTime += Game::deltaTime;
 }
 
-void Enemy::attackShoot()
+void Enemy::attackShoot(sf::Vector2f& t_playerPos)
 {
-	/*switch (m_enemyType)
+
+	if (!m_inAnimation)
 	{
-	default:
-		break;
-	}*/
+		m_typeInfo->getMeleeFrames(m_body);
+
+		// change back when exiting attack
+		m_inAnimation = true;
+		m_maxAnimTime = m_typeInfo->getMeleeTime();
+		m_currentAnimTime = 0.f;
+	}
+	if (m_currentAnimTime > m_maxAnimTime)
+	{
+		sf::Vector2f displacement = math::displacement(m_body->getPosition(), t_playerPos);
+		float moveAngle = math::displacementToDegrees(displacement);
+		moveAngle += (rand() % static_cast<int>(50.f)) - (50.f / 2.f);
+
+		BulletManager::getInstance().initNewEnemyBullet(m_body->getPosition(), moveAngle, 2.f, 1.f, 400.f, -1.f);
+		m_currentMove = MoveExecute::Chase;
+		m_inAnimation = false;
+		m_typeInfo->getMoveFrames(m_body);
+	}
+	m_currentAnimTime += Game::deltaTime;
 }
 
 void Enemy::expire()

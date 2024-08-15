@@ -365,6 +365,9 @@
     <ClInclude Include="include\EnemyDrops.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="include\PlayerDamageApplicator.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ASSETS\IMAGES\Buttons\rotate_button.png">

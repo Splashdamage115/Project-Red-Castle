@@ -16,6 +16,8 @@ public:
 
 	void checkHits();
 	void checkExplosions();
+
+	std::vector<Enemy> getEnemies() { return m_enemies; }
 private:
 	std::vector<Enemy> m_enemies; // vector of all enemies
 };

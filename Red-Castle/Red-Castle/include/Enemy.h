@@ -41,6 +41,8 @@ public:
 
 	void applyDamage(int t_damage);
 
+	sf::FloatRect getdamageBox();
+
 	// *******************************************
 	// standard getters / setters
 	// *******************************************
@@ -59,7 +61,7 @@ private:
 	void calculateMove(sf::Vector2f& t_playerPos);
 
 	void attackMelee();
-	void attackShoot();
+	void attackShoot(sf::Vector2f& t_playerPos);
 	void expire();
 	void expireFade();
 	// *******************************************
@@ -78,6 +80,8 @@ private:
 	float m_moveSpeed{ 0.f };               // distance the enemy moves at every second (pixels)
 	bool m_active{ false };                 // for speed checks and pointer checks
 	float m_collisionRadius{ 30.f };       // distance to check collisions in
+
+	std::shared_ptr<sf::RectangleShape> m_stabBox;
 };
 
 #endif // !ENEMY_H

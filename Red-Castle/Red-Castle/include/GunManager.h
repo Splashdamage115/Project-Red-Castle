@@ -17,7 +17,12 @@ public:
 
 	void reload();
 	void reloadWeaponToMax();
+	void purchaseAmmoRefill();
 	bool refillWeapon();
+
+	std::string getWeaponTypeName() { return m_currentWeapon->name(); }
+	int getAmmoPrice() { return m_currentWeapon->price() / 2; }
+	void deactivateWeapon();
 private:
 	void spawnBullet();
 
@@ -40,6 +45,7 @@ private:
 	int m_magazine{ 0 };
 	int m_magazineMax{ 0 };
 	float m_startReloadAngle{ 0.f };
+	bool m_active{ true };
 };
 
 #endif // !GUN_MANAGER_H

@@ -20,13 +20,20 @@ public:
 
 	void setMouse(bool t_) { m_mouseDown = t_; m_equippedWeapon.setMouse(t_); }
 	void buttonReleased(sf::Keyboard::Key t_keyReleased);
-	void buyNewGun(std::shared_ptr<GunBasic> t_newGun) { m_equippedWeapon.equipNewGun(t_newGun); }
+	void buyNewGun(std::shared_ptr<GunBasic> t_newGun) { m_equippedWeapon.equipNewGun(t_newGun); m_weaponName->setString(m_equippedWeapon.getWeaponTypeName());}
 
-	void setAimVector(sf::Vector2f& t_aimToFollow) { m_equippedWeapon.setPositioning(m_body->getPosition(), t_aimToFollow); }
+	void setAimVector(sf::Vector2f& t_aimToFollow);
 	sf::FloatRect getBounds() { return m_body->getGlobalBounds(); }
 
 	void recieveXp(int t_xpAmt);
+	bool tryPurchase(int t_price);
+	bool tryRefillAmmo(std::shared_ptr<GunBasic> t_newGun);
+	void recieveCash(int t_amtRecieved);
+
+	void applyDamage(int t_damageAmt);
 private:
+	void expire();
+
 	std::shared_ptr<AnimatedSprite> m_body; // animated body sprite of the player
 	std::shared_ptr<InputBasic> m_input;    // input type used by the player
 	float m_speed{ 100.f };				    // speed at which the player moves every second (pixels)
@@ -38,6 +45,16 @@ private:
 
 	int m_xpLvl{ 0 };
 	std::shared_ptr<sf::Text> m_xpText;
+	int m_cashAmt{ 0 };
+	std::shared_ptr<sf::Text> m_cashText;
+	std::shared_ptr<sf::Text> m_weaponName;
+	std::shared_ptr<sf::Text> m_hp;
+
+	int m_health{ 0 };
+	int m_healthMax{ 0 };
+	float m_invincibilityTime{ 1.0f };
+
+	float m_deadTimer{ 0.f };
 };
 
 #endif // !PLAYER_H

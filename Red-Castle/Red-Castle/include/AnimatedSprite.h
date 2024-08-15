@@ -12,6 +12,12 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	bool getFrameNum(int t_frameToCheck)
+	{
+		if (m_selectedRegion == t_frameToCheck)
+			return true;
+		return false;
+	}
 	void clearFrames() // should be immediately followed by more frame adding!!!
 	{
 		m_renderRegions.clear();

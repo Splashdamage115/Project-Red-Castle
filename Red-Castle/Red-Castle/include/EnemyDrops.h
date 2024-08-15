@@ -37,6 +37,13 @@ public:
 	virtual void checkCollidedWithPlayer(Player& t_player)override;
 };
 
+class CashDrop : public DropBasic
+{
+public:
+	virtual void initialiseType()override;
+	virtual void checkCollidedWithPlayer(Player& t_player)override;
+};
+
 class DropManager
 {
 public:

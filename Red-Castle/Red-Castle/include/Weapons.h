@@ -33,6 +33,7 @@ public:
 	virtual int getMagazine() = 0;
 	virtual float reloadTime() = 0;
 	virtual int price() = 0;
+	virtual std::string name() = 0;
 };
 
 class BasicPistol : public GunBasic
@@ -61,7 +62,8 @@ public:
 	virtual int getStockpile() { return 80; }
 	virtual int getMagazine() { return 8; }
 	virtual float reloadTime() { return 1.5f; }
-	virtual int price() { return 350; }
+	virtual int price() { return 10; }
+	virtual std::string name() { return "Basic Pistol"; }
 };
 
 class BasicSMG : public GunBasic
@@ -90,7 +92,8 @@ public:
 	virtual int getStockpile() { return 180; }
 	virtual int getMagazine() { return 36; }
 	virtual float reloadTime() { return 2.f; }
-	virtual int price() { return 1800; }
+	virtual int price() { return 25; }
+	virtual std::string name() { return "Basic SMG"; }
 };
 
 class BasicShotgun : public GunBasic
@@ -119,7 +122,8 @@ public:
 	virtual int getStockpile() { return 35; }
 	virtual int getMagazine() { return 5; }
 	virtual float reloadTime() { return 4.0f; }
-	virtual int price() { return 1200; }
+	virtual int price() { return 45; }
+	virtual std::string name() { return "Basic ShotGun"; }
 };
 
 class BasicLMG : public GunBasic
@@ -148,7 +152,8 @@ public:
 	virtual int getStockpile() { return 360; }
 	virtual int getMagazine() { return 80; }
 	virtual float reloadTime() { return 7.f; }
-	virtual int price() { return 3450; }
+	virtual int price() { return 70; }
+	virtual std::string name() { return "Basic LMG"; }
 };
 
 #endif // !WEAPONS_H

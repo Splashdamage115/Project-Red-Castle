@@ -4,6 +4,7 @@
 #include <ctime>
 #include "BulletManager.h"
 #include "EnemyDrops.h"
+#include "PlayerDamageApplicator.h"
 
 
 /// <summary>
@@ -70,9 +71,7 @@ void GamePlay::processKeys(sf::Event& t_event)
 	}
 	if (t_event.key.code == sf::Keyboard::F)
 	{
-		std::shared_ptr<GunBasic> newWeapon = m_purchasables.tryPurchase();
-		if(newWeapon != nullptr)
-			m_player.buyNewGun(newWeapon);
+		m_purchasables.tryPurchase(m_player);
 	}
 	if (sf::Event::KeyReleased == t_event.type)
 	{
@@ -86,6 +85,7 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	m_purchasables.update();
 	findMousePosGlobal(); // mouse in the world
 	m_player.setAimVector(m_mousePosGlobal);
 	ParticleSystem::getInstance().update();
@@ -98,6 +98,9 @@ void GamePlay::update()
 	m_enemyManager.checkExplosions();
 	m_purchasables.checkCollisions(m_player.getBounds());
 	DropManager::getInstance().update(m_player);
+
+	PlayerDamageApplicator::checkHits(m_player, m_enemyManager.getEnemies());
+	PlayerDamageApplicator::checkHitsBullets(m_player);
 }
 
 /// <summary>

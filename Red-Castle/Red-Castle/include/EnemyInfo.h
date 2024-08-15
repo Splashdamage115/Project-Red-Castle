@@ -46,6 +46,14 @@ public:
 	{
 
 	}
+	virtual bool getStabFrame(std::shared_ptr<AnimatedSprite> t_body)
+	{
+		return false;
+	}
+	virtual sf::FloatRect getDamageBox()
+	{
+		return sf::FloatRect(0.f, 0.f, 0.f, 0.f);
+	}
 };
 
 
@@ -155,6 +163,19 @@ public:
 	{
 		return 4.f;
 	}
+	virtual bool getStabFrame(std::shared_ptr<AnimatedSprite> t_body)
+	{
+		return t_body->getFrameNum(3);
+	}
+	virtual sf::FloatRect getDamageBox()
+	{
+		return sf::FloatRect(-25.f, 5.f, 70.f, 70.f);
+	}
+	virtual float getShootRadius()
+	{
+		// working on shooting for enemies
+		return -1.f;
+	}
 };
 
 
@@ -188,7 +209,7 @@ public:
 	}
 	virtual float getMeleeRadius()
 	{
-		return 70.f; // for no melee characters
+		return 70.f; // 
 	}
 	virtual float getMeleeTime()
 	{
@@ -225,6 +246,14 @@ public:
 	virtual float getExpireFadeTime()
 	{
 		return 4.f;
+	}
+	virtual bool getStabFrame(std::shared_ptr<AnimatedSprite> t_body)
+	{
+		return t_body->getFrameNum(3);
+	}
+	virtual sf::FloatRect getDamageBox()
+	{
+		return sf::FloatRect(-25.f, 5.f, 70.f, 70.f);
 	}
 };
 

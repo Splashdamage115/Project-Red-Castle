@@ -101,6 +101,43 @@ void XPDrop::checkCollidedWithPlayer(Player& t_player)
 
 
 // **********************************************************************
+//						Cash
+// **********************************************************************
+void CashDrop::initialiseType()
+{
+	m_body = std::make_shared<AnimatedSprite>(0.125f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\Coin.png"));
+
+	m_body->addFrame(sf::IntRect(0, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(32, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(64, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(96, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(128, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(160, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(192, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(224, 0, 32, 40));
+
+	m_body->setScale(sf::Vector2f(0.5f, 0.5f));
+
+	RenderObject::getInstance().addParticles(m_body);
+}
+
+void CashDrop::checkCollidedWithPlayer(Player& t_player)
+{
+	if (m_body->getGlobalBounds().intersects(t_player.getBounds()))
+	{
+		t_player.recieveCash(1);
+
+		// deactivate
+		m_active = false;
+		m_body->setActive(false);
+		m_body = nullptr;
+	}
+}
+
+
+
+
+// **********************************************************************
 //						Drop manager
 // **********************************************************************
 
@@ -109,10 +146,12 @@ void DropManager::initNewDrops(int t_amtOfDrops, sf::Vector2f t_position)
 	for (unsigned int i = 0; i < t_amtOfDrops; i++)
 	{
 
-		int randType = rand() % 1;
+		int randType = rand() % 10;
 		std::shared_ptr<DropBasic> newDrop;
 		if (randType == 0)
 			newDrop = std::make_shared<XPDrop>();
+		if (randType == 9)
+			newDrop = std::make_shared<CashDrop>();
 		else
 			newDrop = std::make_shared<XPDrop>();
 
@@ -148,3 +187,4 @@ void DropManager::update(Player& t_player)
 		m_drops.at(i)->checkCollidedWithPlayer(t_player);
 	}
 }
+

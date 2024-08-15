@@ -6,6 +6,8 @@ void Purchasable::initWeaponBuyable(sf::Vector2f t_pos, std::shared_ptr<GunBasic
 {
 	m_weapon = t_weapon;
 
+	m_price = t_weapon->price();
+
 	m_body = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture(m_weapon->textureLocation()));
 	m_weapon->getAnimation(m_body);
 	m_body->setOrigin(sf::Vector2f(0.f, 0.f));
