@@ -147,6 +147,12 @@
     <ClCompile Include="src\EnemyDrops.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\Extractor.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtractManager.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -366,6 +372,12 @@
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\PlayerDamageApplicator.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Extractor.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ExtractManager.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

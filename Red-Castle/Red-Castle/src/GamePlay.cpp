@@ -5,6 +5,7 @@
 #include "BulletManager.h"
 #include "EnemyDrops.h"
 #include "PlayerDamageApplicator.h"
+#include "Game.h"
 
 
 /// <summary>
@@ -101,6 +102,8 @@ void GamePlay::update()
 
 	PlayerDamageApplicator::checkHits(m_player, m_enemyManager.getEnemies());
 	PlayerDamageApplicator::checkHitsBullets(m_player);
+
+	m_extractors.checkExtract(m_player, m_enemyManager);
 }
 
 /// <summary>
@@ -122,3 +125,4 @@ void GamePlay::processMouse(sf::Event& t_event)
 		//BulletManager::getInstance().initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
 	}
 }
+

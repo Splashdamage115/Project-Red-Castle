@@ -7,7 +7,7 @@
 class GunManager
 {
 public:
-	GunManager();
+	GunManager(bool t_player);
 	void equipNewGun(std::shared_ptr<GunBasic> t_newGun);
 	void setPositioning(sf::Vector2f& t_startLocation, sf::Vector2f& t_aim);
 
@@ -19,6 +19,7 @@ public:
 	void reloadWeaponToMax();
 	void purchaseAmmoRefill();
 	bool refillWeapon();
+	void setGunToFull();
 
 	std::string getWeaponTypeName() { return m_currentWeapon->name(); }
 	int getAmmoPrice() { return m_currentWeapon->price() / 2; }
@@ -46,6 +47,8 @@ private:
 	int m_magazineMax{ 0 };
 	float m_startReloadAngle{ 0.f };
 	bool m_active{ true };
+
+	bool m_playerDisplay{ false };
 };
 
 #endif // !GUN_MANAGER_H

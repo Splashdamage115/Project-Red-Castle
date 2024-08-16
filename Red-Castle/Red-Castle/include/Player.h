@@ -31,6 +31,9 @@ public:
 	void recieveCash(int t_amtRecieved);
 
 	void applyDamage(int t_damageAmt);
+
+	bool getAlive() { return m_alive; }
+	void followPosition(sf::Vector2f t_pos);
 private:
 	void expire();
 
@@ -55,6 +58,7 @@ private:
 	float m_invincibilityTime{ 1.0f };
 
 	float m_deadTimer{ 0.f };
+	bool m_alive{ false };
 };
 
 #endif // !PLAYER_H

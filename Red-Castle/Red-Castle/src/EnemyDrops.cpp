@@ -143,7 +143,7 @@ void CashDrop::checkCollidedWithPlayer(Player& t_player)
 
 void DropManager::initNewDrops(int t_amtOfDrops, sf::Vector2f t_position)
 {
-	for (unsigned int i = 0; i < t_amtOfDrops; i++)
+	for (int i = 0; i < t_amtOfDrops; i++)
 	{
 
 		int randType = rand() % 10;

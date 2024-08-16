@@ -8,9 +8,9 @@
 #include "Particles.h"
 #include "GlobalFontStorage.h"
 
-GunManager::GunManager()
+GunManager::GunManager(bool t_player)
 {
-	equipNewGun(std::make_shared<BasicShotgun>());
+	m_playerDisplay = t_player;
 }
 
 void GunManager::equipNewGun(std::shared_ptr<GunBasic> t_newGun)
@@ -30,14 +30,17 @@ void GunManager::equipNewGun(std::shared_ptr<GunBasic> t_newGun)
 	m_stockpile = m_stockpileMax;
 	m_reloadTime = m_currentWeapon->reloadTime();
 
-	m_magazineText = std::make_shared<sf::Text>();
-	m_magazineText->setFont(*GlobalFontStorage::getInstance().getFont());
-	m_magazineText->setCharacterSize(24u);
-	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
-	m_magazineText->setPosition(30.f, 30.f);
+	if(m_playerDisplay)
+	{
+		m_magazineText = std::make_shared<sf::Text>();
+		m_magazineText->setFont(*GlobalFontStorage::getInstance().getFont());
+		m_magazineText->setCharacterSize(24u);
+		m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+		m_magazineText->setPosition(30.f, 30.f);
 
 
-	RenderObject::getInstance().addHUD(m_magazineText);
+		RenderObject::getInstance().addHUD(m_magazineText);
+	}
 }
 
 void GunManager::setPositioning(sf::Vector2f& t_startLocation, sf::Vector2f& t_aim)
@@ -74,7 +77,7 @@ void GunManager::update()
 
 	m_weaponBody->update();
 
-	if(m_reloading)
+	if(m_reloading && m_playerDisplay)
 		m_magazineText->setString("RELOADING");
 
 	// reduce shot cooldown
@@ -147,7 +150,8 @@ void GunManager::reloadWeaponToMax()
 		m_magazine = m_stockpile;
 		m_stockpile = 0;
 	}
-	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+	if(m_playerDisplay)
+		m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 }
 
 void GunManager::purchaseAmmoRefill()
@@ -156,7 +160,8 @@ void GunManager::purchaseAmmoRefill()
 	m_shootCooldownRemaining = 0.f;
 	m_stockpile = m_stockpileMax;
 	m_magazine = m_magazineMax;
-	m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+	if(m_playerDisplay)
+		m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 }
 
 bool GunManager::refillWeapon()
@@ -167,6 +172,11 @@ bool GunManager::refillWeapon()
 		return true;
 	}
 	return false;
+}
+
+void GunManager::setGunToFull()
+{
+	m_magazine = m_magazineMax;
 }
 
 void GunManager::deactivateWeapon()
@@ -181,7 +191,7 @@ void GunManager::spawnBullet()
 		return;
 
 	m_shootCooldownRemaining = m_shootCooldownMax; // reset shot cooldown
-	m_magazine--; m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
+	m_magazine--; if(m_playerDisplay) m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 
 	// calculate the position of the bullets spawn, making them spawn at the end of the barrel
 	sf::Vector2f displacement = math::displacement(m_position, m_aim);

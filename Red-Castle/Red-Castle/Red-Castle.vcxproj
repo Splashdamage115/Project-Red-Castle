@@ -29,6 +29,8 @@
     <ClCompile Include="src\EnemyDrops.cpp" />
     <ClCompile Include="src\EnemyManager.cpp" />
     <ClCompile Include="src\ExplosiveManager.cpp" />
+    <ClCompile Include="src\ExtractManager.cpp" />
+    <ClCompile Include="src\Extractor.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
@@ -57,6 +59,8 @@
     <ClInclude Include="include\EnemyInfo.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\ExplosiveManager.h" />
+    <ClInclude Include="include\ExtractManager.h" />
+    <ClInclude Include="include\Extractor.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />
     <ClInclude Include="include\GamePlay.h" />

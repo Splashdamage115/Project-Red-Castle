@@ -6,7 +6,7 @@
 #include "ExplosiveManager.h"
 #include "CollisionDetector.h"
 
-Player::Player()
+Player::Player() : m_equippedWeapon(true)
 {
 }
 
@@ -16,7 +16,10 @@ Player::~Player()
 
 void Player::init(sf::Vector2f t_position)
 {
+	m_equippedWeapon.equipNewGun(std::make_shared<BasicShotgun>());
+
 	m_active = true;
+	m_alive = true;
 
 	m_healthMax = 10;
 	m_health = m_healthMax;
@@ -232,8 +235,17 @@ void Player::applyDamage(int t_damageAmt)
 	}
 }
 
+void Player::followPosition(sf::Vector2f t_pos)
+{
+	sf::Vector2f move = math::displacement(m_body->getPosition(), t_pos) * 100.f * Game::deltaTime;
+	m_body->move(move);
+
+	m_followCam.update(m_body->getPosition());
+}
+
 void Player::expire()
 {
+	m_alive = false;
 	m_deadTimer = 3.f;
 	m_body->clearFrames();
 	m_body->addFrame(sf::IntRect(0, 272, 240, 284));

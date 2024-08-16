@@ -17,6 +17,7 @@ void Enemy::init(EnemySetupInfo& t_type)
 {
 	m_health = t_type.health;
 	m_active = true;
+	m_alive = true;
 	m_moveSpeed = t_type.moveSpeed;
 
 	m_currentMove = MoveExecute::None;
@@ -113,6 +114,7 @@ void Enemy::applyDamage(int t_damage)
 	{
 		m_currentMove = MoveExecute::Expire;
 		m_inAnimation = false;
+		m_alive = false;
 	}
 }
 
@@ -192,7 +194,7 @@ void Enemy::attackShoot(sf::Vector2f& t_playerPos)
 		float moveAngle = math::displacementToDegrees(displacement);
 		moveAngle += (rand() % static_cast<int>(50.f)) - (50.f / 2.f);
 
-		BulletManager::getInstance().initNewEnemyBullet(m_body->getPosition(), moveAngle, 2.f, 1.f, 400.f, -1.f);
+		BulletManager::getInstance().initNewEnemyBullet(m_body->getPosition(), moveAngle, 2.f, 1, 400.f, -1.f);
 		m_currentMove = MoveExecute::Chase;
 		m_inAnimation = false;
 		m_typeInfo->getMoveFrames(m_body);

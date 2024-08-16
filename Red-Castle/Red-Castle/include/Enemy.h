@@ -52,6 +52,7 @@ public:
 	bool canApplyDamage() { return (m_currentMove != MoveExecute::Expire && m_currentMove != MoveExecute::ExpireFade); }
 	sf::Vector2f getPos() { return m_body->getPosition(); }
 	float getRadius() { return m_collisionRadius; }
+	bool getAlive() { return m_alive; }
 	// *******************************************
 private:
 
@@ -82,6 +83,7 @@ private:
 	float m_collisionRadius{ 30.f };       // distance to check collisions in
 
 	std::shared_ptr<sf::RectangleShape> m_stabBox;
+	bool m_alive{ false };
 };
 
 #endif // !ENEMY_H

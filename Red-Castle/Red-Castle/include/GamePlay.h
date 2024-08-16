@@ -9,6 +9,7 @@
 #include "BulletManager.h"
 #include "GunManager.h"
 #include "PurchasableManager.h"
+#include "ExtractManager.h"
 
 class GamePlay : public GameMode
 {
@@ -26,6 +27,7 @@ private:
 
 	EnemyManager m_enemyManager;
 	PurchasableManager m_purchasables;
+	ExtractManager m_extractors;
 	Player m_player;
 };
 
