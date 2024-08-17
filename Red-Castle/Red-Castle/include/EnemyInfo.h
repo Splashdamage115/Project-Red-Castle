@@ -54,6 +54,10 @@ public:
 	{
 		return sf::FloatRect(0.f, 0.f, 0.f, 0.f);
 	}
+	virtual sf::Vector2f getShadowPosition()
+	{
+		return sf::Vector2f(0.f, 0.f);
+	}
 };
 
 
@@ -94,6 +98,10 @@ public:
 	virtual float getExpireFadeTime()
 	{
 		return 2.f;
+	}
+	virtual sf::Vector2f getShadowPosition()
+	{
+		return sf::Vector2f(65.f, -25.f);
 	}
 };
 
@@ -176,6 +184,10 @@ public:
 		// working on shooting for enemies
 		return -1.f;
 	}
+	virtual sf::Vector2f getShadowPosition()
+	{
+		return sf::Vector2f(450.f, -18.f);
+	}
 };
 
 
@@ -254,6 +266,10 @@ public:
 	virtual sf::FloatRect getDamageBox()
 	{
 		return sf::FloatRect(-25.f, 5.f, 70.f, 70.f);
+	}
+	virtual sf::Vector2f getShadowPosition()
+	{
+		return sf::Vector2f(250.f, -88.f);
 	}
 };
 

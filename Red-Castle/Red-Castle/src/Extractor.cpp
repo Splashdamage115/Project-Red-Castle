@@ -122,6 +122,7 @@ void ExtractorCharacter::update(sf::Vector2f& t_playerPos, EnemyManager& t_enemy
 			if (m_roper && m_leaving)
 			{
 				m_ropeLine->setPosition(m_body->getPosition());
+				m_ropeLine->setRotation(math::displacementToDegrees(math::displacement(m_body->getPosition(), t_playerPos)));
 			}
 			m_body->update();
 

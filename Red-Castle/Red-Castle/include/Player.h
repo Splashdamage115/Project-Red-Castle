@@ -38,6 +38,7 @@ private:
 	void expire();
 
 	std::shared_ptr<AnimatedSprite> m_body; // animated body sprite of the player
+	std::shared_ptr<AnimatedSprite> m_shadow;
 	std::shared_ptr<InputBasic> m_input;    // input type used by the player
 	float m_speed{ 100.f };				    // speed at which the player moves every second (pixels)
 	CameraTracker m_followCam;

@@ -44,6 +44,8 @@
     <ClCompile Include="src\RenderObject.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\SplashScreen.cpp" />
+    <ClCompile Include="src\TileSetManager.cpp" />
+    <ClCompile Include="src\WaveManager.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +85,8 @@
     <ClInclude Include="include\SoundPlayer.h" />
     <ClInclude Include="include\SplashScreen.h" />
     <ClInclude Include="include\TextureLoader.h" />
+    <ClInclude Include="include\TileSetManager.h" />
+    <ClInclude Include="include\WaveManager.h" />
     <ClInclude Include="include\Weapons.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />

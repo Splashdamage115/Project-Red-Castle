@@ -16,7 +16,7 @@ Player::~Player()
 
 void Player::init(sf::Vector2f t_position)
 {
-	m_equippedWeapon.equipNewGun(std::make_shared<BasicShotgun>());
+	m_equippedWeapon.equipNewGun(std::make_shared<BasicAssault>());
 
 	m_active = true;
 	m_alive = true;
@@ -34,6 +34,19 @@ void Player::init(sf::Vector2f t_position)
 	m_body->addFrame(sf::IntRect(147 * 5, 0, 147, 246));
 	m_body->addFrame(sf::IntRect(147 * 6, 0, 147, 246));
 	m_body->setScale(sf::Vector2f(0.25f, 0.25f));
+
+
+	m_shadow = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\shadowPlayer.png"));
+	m_shadow->addFrame(sf::IntRect(0, 0, 64, 16));
+	m_shadow->setOrigin(sf::Vector2f(
+		((65.f) - m_shadow->getGlobalBounds().width / 2.f),
+		((-15.f) - m_shadow->getGlobalBounds().height / 2.f)
+	));
+	m_shadow->setPosition(m_body->getPosition());
+	RenderObject::getInstance().add(m_shadow);
+
+
+
 	RenderObject::getInstance().add(m_body);
 
 	// initialise XP amt
@@ -152,6 +165,8 @@ void Player::update()
 			m_body->setScale(sf::Vector2f(std::abs(m_body->getScale().x), m_body->getScale().y));
 		}
 
+		m_shadow->setPosition(m_body->getPosition());
+
 		// set camera to follow player position
 		m_followCam.update(m_body->getPosition());
 	}
@@ -239,6 +254,8 @@ void Player::followPosition(sf::Vector2f t_pos)
 {
 	sf::Vector2f move = math::displacement(m_body->getPosition(), t_pos) * 100.f * Game::deltaTime;
 	m_body->move(move);
+
+	m_shadow->setPosition(m_body->getPosition());
 
 	m_followCam.update(m_body->getPosition());
 }

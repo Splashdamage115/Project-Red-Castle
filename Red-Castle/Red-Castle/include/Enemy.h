@@ -68,6 +68,7 @@ private:
 	// *******************************************
 
 	std::shared_ptr<AnimatedSprite> m_body; // animated body of the enemy
+	std::shared_ptr<AnimatedSprite> m_shadow;
 	std::shared_ptr<EnemyInfo> m_typeInfo; // used to get the used animation
 	MoveExecute m_currentMove{ MoveExecute::None }; // current state of the enemy
 

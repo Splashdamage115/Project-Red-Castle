@@ -51,6 +51,15 @@ void Enemy::init(EnemySetupInfo& t_type)
 		break;
 	}
 
+	m_shadow = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\shadow.png"));
+	m_shadow->addFrame(sf::IntRect(0,0,64,16));
+	m_shadow->setOrigin(sf::Vector2f(
+		((m_typeInfo->getShadowPosition().x * m_body->getScale().x) - m_shadow->getGlobalBounds().width / 2.f),
+		((m_typeInfo->getShadowPosition().y * m_body->getScale().y) - m_shadow->getGlobalBounds().height / 2.f)
+	));
+	m_shadow->setPosition(m_body->getPosition());
+	RenderObject::getInstance().add(m_shadow);
+
 	m_stabBox = std::make_shared<sf::RectangleShape>();
 	m_stabBox->setSize(sf::Vector2f(50.f, 50.f));
 	m_stabBox->setOrigin(sf::Vector2f(60.f,25.f) - sf::Vector2f(m_body->getLocalBounds().width / 2.f, m_body->getLocalBounds().height / 2.f));
@@ -84,6 +93,7 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 		switch (m_currentMove)
 		{
 		case MoveExecute::None:
+			m_shadow->setPosition(m_body->getPosition());
 			break;
 		case MoveExecute::Chase:
 			calculateMove(t_playerPos);
@@ -136,6 +146,8 @@ void Enemy::calculateMove(sf::Vector2f& t_playerPos)
 	// move enemy towards player
 	sf::Vector2f enemyMove = math::displacement(m_body->getPosition(), t_playerPos) * m_moveSpeed * Game::deltaTime;
 	m_body->move(enemyMove);
+	m_shadow->setPosition(m_body->getPosition());
+
 	m_stabBox->setPosition(m_body->getPosition());
 
 	// flip the character depending on movement
@@ -236,7 +248,9 @@ void Enemy::expireFade()
 	{
 		m_active = false;
 		m_body->setActive(false);
+		m_shadow->setActive(false);
 		m_body->setPosition(sf::Vector2f(-100000.f, -100000.f));
+		m_shadow->setPosition(sf::Vector2f(-100000.f, -100000.f));
 	}
 	m_currentAnimTime += Game::deltaTime;
 }

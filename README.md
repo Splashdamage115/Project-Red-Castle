@@ -28,7 +28,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>⬜ - Go through old stuff and add comments!!!</li>
     <li>✅ - Enemy hit -1 damage pop up (NOTE : MAY BE LAGGY)</li>
     <li>✅ - Enemy drop system</li>
-    <li>🔴 - Wave system</li>
+    <li>🟡 - Wave system</li>
     <li>✅ - player health</li>
     <li>✅ - Player body extract</li>
     <li>🔴 - doctor buff</li>

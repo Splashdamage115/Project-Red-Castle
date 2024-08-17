@@ -10,6 +10,8 @@
 #include "GunManager.h"
 #include "PurchasableManager.h"
 #include "ExtractManager.h"
+#include "TileSetManager.h"
+#include "WaveManager.h"
 
 class GamePlay : public GameMode
 {
@@ -25,8 +27,10 @@ private:
 	void processKeys(sf::Event& t_event)override;      // handles all key inputs
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
-	EnemyManager m_enemyManager;
-	PurchasableManager m_purchasables;
+	std::shared_ptr<EnemyManager> m_enemyManager;
+	std::shared_ptr<PurchasableManager> m_purchasables;
+	std::shared_ptr<TileSetManager> m_tileSet;
+	WaveManager m_waveManager;
 	ExtractManager m_extractors;
 	Player m_player;
 };

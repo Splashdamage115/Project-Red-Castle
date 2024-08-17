@@ -71,13 +71,13 @@ void XPDrop::initialiseType()
 {
 	m_body = std::make_shared<AnimatedSprite>(0.125f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\xpOrb.png"));
 
-	m_body->addFrame(sf::IntRect(0, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(32, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(64, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(96, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(128, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(160, 0, 32, 40));
-	m_body->addFrame(sf::IntRect(192, 0, 32, 40));
+	m_body->addFrame(sf::IntRect(0, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(32, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(64, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(96, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(128, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(160, 0, 32, 48));
+	m_body->addFrame(sf::IntRect(192, 0, 32, 48));
 
 	m_body->setScale(sf::Vector2f(0.5f, 0.5f));
 
