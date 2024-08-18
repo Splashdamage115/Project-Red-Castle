@@ -2,6 +2,7 @@
 #define GAMEPLAY_H
 
 #include "GameMode.h"
+#include "SimpleButton.h"
 
 // stuff to do with the game
 #include "EnemyManager.h"
@@ -27,12 +28,16 @@ private:
 	void processKeys(sf::Event& t_event)override;      // handles all key inputs
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
+	void interpretApplicators();
+
 	std::shared_ptr<EnemyManager> m_enemyManager;
 	std::shared_ptr<PurchasableManager> m_purchasables;
 	std::shared_ptr<TileSetManager> m_tileSet;
 	WaveManager m_waveManager;
 	ExtractManager m_extractors;
 	Player m_player;
+
+	std::vector<std::shared_ptr<SimpleButton>> m_simpleButtons;
 };
 
 #endif // !GAMEPLAY_H

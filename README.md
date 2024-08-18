@@ -20,7 +20,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>✅ - Sound Buffer class🟠</li>
     <li>✅ - moving animation for slime</li>
     <li>✅ - Player Animation</li>
-    <li>🔷 - buff system</li>
+    <li>🟡 - buff system</li>
     <li>✅ - logo</li>
     <li>✅ - splash screen</li>
     <li>🔷 - Sound on splash screen</li>
@@ -28,7 +28,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>⬜ - Go through old stuff and add comments!!!</li>
     <li>✅ - Enemy hit -1 damage pop up (NOTE : MAY BE LAGGY)</li>
     <li>✅ - Enemy drop system</li>
-    <li>🟡 - Wave system</li>
+    <li>🟠 - Wave system</li>
     <li>✅ - player health</li>
     <li>✅ - Player body extract</li>
     <li>🔴 - doctor buff</li>
@@ -50,6 +50,9 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔴 - armour system player health</li>
     <li>🔴 - Enemy shield</li>
     <li>🔴 - Level up buffs</li>
+    <li>🟠 - Tile system</li>
+    <li>🔴 - Tile system Doors</li>
+    <li>🔴 - Tile system Bridges</li>
   </ul>
 <br><br><br>
   </em></p>
@@ -61,7 +64,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
        <li>✅ - Completed</li>
        <li>🔷 - Under Review</li>
        <li>⬜ - Add comments</li>
-       <li>🐛 - Add comments</li>
+       <li>🐛 - Bug!</li>
      </ul>
     </h6>
   </em>

@@ -7,8 +7,11 @@
 #include "cameraTracker.h"
 #include "GunManager.h"
 
+class PlayerBuffInterpretter;
+
 class Player
 {
+friend class PlayerBuffInterpretter;
 public:
 	Player();
 	~Player();

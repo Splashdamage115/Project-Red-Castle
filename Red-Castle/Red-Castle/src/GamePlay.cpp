@@ -6,6 +6,8 @@
 #include "EnemyDrops.h"
 #include "PlayerDamageApplicator.h"
 #include "Game.h"
+#include "BuffHolder.h"
+#include "PlayerBuffInterpretter.hpp"
 
 
 /// <summary>
@@ -14,6 +16,8 @@
 GamePlay::GamePlay()
 {
 	resetLevel();
+
+	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("Add move Buff"));
 }
 
 /// <summary>
@@ -71,11 +75,7 @@ void GamePlay::events(sf::Event& t_event)
 /// <param name="t_event">use this for the key press</param>
 void GamePlay::processKeys(sf::Event& t_event)
 {
-	// spawn enemy on random type, position and speed
-	if (t_event.key.code == sf::Keyboard::Space)
-	{
-		
-	}
+	
 	if (t_event.key.code == sf::Keyboard::F)
 	{
 		m_purchasables->tryPurchase(m_player);
@@ -92,6 +92,21 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	// ***********************************************
+	// DEBUG PURPOSSES OF APPLICATION
+	// ***********************************************
+	if(m_simpleButtons.at(0)->clicked())
+	{
+		Buff newBuff;
+		newBuff.active = true;
+		newBuff.applier = ApplicationType::Once;
+		newBuff.applyLocation = AlertClassName::Player;
+		newBuff.increase = 30.f;
+		newBuff.name = BuffName::PlayerSpeed;
+		BuffHolder::getInstance().initNew(newBuff);
+	}
+	// ***********************************************
+
 	m_purchasables->update();
 	findMousePosGlobal(); // mouse in the world
 	m_player.setAimVector(m_mousePosGlobal);
@@ -112,6 +127,9 @@ void GamePlay::update()
 	m_extractors.checkExtract(m_player, *m_enemyManager);
 
 	m_waveManager.update();
+
+	if (BuffHolder::getInstance().getAlert())
+		interpretApplicators();
 }
 
 /// <summary>
@@ -131,6 +149,22 @@ void GamePlay::processMouse(sf::Event& t_event)
 	{
 		m_player.setMouse(false);
 		//BulletManager::getInstance().initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
+	}
+}
+
+void GamePlay::interpretApplicators()
+{
+	std::vector<std::shared_ptr<Buff>> buffs = BuffHolder::getInstance().getOneTimeApplicators();
+
+	for (auto& buff : buffs)
+	{
+		if (buff->active)
+		{
+			if (buff->applyLocation == AlertClassName::Player)
+			{
+				PlayerBuffInterpretter::InterpretPlayerBuffs(m_player, buff);
+			}
+		}
 	}
 }
 

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AnimatedSprite.cpp" />
+    <ClCompile Include="src\BuffHolder.cpp" />
     <ClCompile Include="src\Bullet.cpp" />
     <ClCompile Include="src\BulletManager.cpp" />
     <ClCompile Include="src\Button.cpp" />
@@ -50,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AnimatedSprite.h" />
+    <ClInclude Include="include\BuffHolder.h" />
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\BulletManager.h" />
     <ClInclude Include="include\Button.h" />
@@ -74,6 +76,7 @@
     <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\PlayerBuffInterpretter.hpp" />
     <ClInclude Include="include\PlayerDamageApplicator.h" />
     <ClInclude Include="include\PurchasableManager.h" />
     <ClInclude Include="include\Purchasables.h" />

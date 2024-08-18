@@ -54,9 +54,7 @@
 #ifndef RENDER_OBJECT_H
 #define RENDER_OBJECT_H
 
-#include<SFML/Graphics.hpp>
-#include<vector>
-#include<iostream>
+#include "Library.h"
 
 #include"Globals.h"
 

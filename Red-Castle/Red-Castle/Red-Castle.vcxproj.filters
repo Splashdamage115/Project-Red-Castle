@@ -138,25 +138,28 @@
     <ClCompile Include="src\GamePlay.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\ExtractManager.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\Extractor.cpp">
-      <Filter>Source Files\Not Current\GamePlay</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Player.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
     <ClCompile Include="src\EnemyDrops.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy.cpp">
+    <ClCompile Include="src\WaveManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\WaveManager.cpp">
+    <ClCompile Include="src\TileSetManager.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ExtractManager.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\TileSetManager.cpp">
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BuffHolder.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,26 +365,11 @@
     <ClInclude Include="include\Weapons.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="include\Enemy.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\EnemyInfo.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\Extractor.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PlayerDamageApplicator.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Player.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ExtractManager.h">
-      <Filter>Header Files\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\WaveManager.h">
-      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\EnemyDrops.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
@@ -389,7 +377,28 @@
     <ClInclude Include="include\EnemyManager.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="include\BuffHolder.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
     <ClInclude Include="include\TileSetManager.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WaveManager.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ExtractManager.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerDamageApplicator.h">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerBuffInterpretter.hpp">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
