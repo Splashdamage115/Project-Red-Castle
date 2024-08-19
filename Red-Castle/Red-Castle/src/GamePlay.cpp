@@ -75,7 +75,13 @@ void GamePlay::events(sf::Event& t_event)
 /// <param name="t_event">use this for the key press</param>
 void GamePlay::processKeys(sf::Event& t_event)
 {
-	
+	if (t_event.key.code == sf::Keyboard::Space)
+	{
+		m_levelUp = true;
+
+		m_levelUpScreen = std::make_shared<LevelUpScreen>();
+		m_levelUpScreen->init();
+	}
 	if (t_event.key.code == sf::Keyboard::F)
 	{
 		m_purchasables->tryPurchase(m_player);
@@ -107,29 +113,41 @@ void GamePlay::update()
 	}
 	// ***********************************************
 
-	m_purchasables->update();
-	findMousePosGlobal(); // mouse in the world
-	m_player.setAimVector(m_mousePosGlobal);
-	ParticleSystem::getInstance().update();
-	BulletManager::getInstance().updateBullets();
-	m_player.update();
-	m_enemyManager->update(m_player.getPos()); // enemies always chase player
+	if (m_levelUp)
+	{
+		m_levelUpScreen->update();
+		if (m_levelUpScreen->checkClosed())
+		{
+			m_levelUp = false;
+			m_levelUpScreen = nullptr;
+		}
+	}
+	else
+	{ 
+		m_purchasables->update();
+		findMousePosGlobal(); // mouse in the world
+		m_player.setAimVector(m_mousePosGlobal);
+		ParticleSystem::getInstance().update();
+		BulletManager::getInstance().updateBullets();
+		m_player.update();
+		m_enemyManager->update(m_player.getPos()); // enemies always chase player
 
-	m_enemyManager->checkHits();
-	ExplosiveManager::getInstance().updateExplosions();
-	m_enemyManager->checkExplosions();
-	m_purchasables->checkCollisions(m_player.getBounds());
-	DropManager::getInstance().update(m_player);
+		m_enemyManager->checkHits();
+		ExplosiveManager::getInstance().updateExplosions();
+		m_enemyManager->checkExplosions();
+		m_purchasables->checkCollisions(m_player.getBounds());
+		DropManager::getInstance().update(m_player);
 
-	PlayerDamageApplicator::checkHits(m_player, m_enemyManager->getEnemies());
-	PlayerDamageApplicator::checkHitsBullets(m_player);
+		PlayerDamageApplicator::checkHits(m_player, m_enemyManager->getEnemies());
+		PlayerDamageApplicator::checkHitsBullets(m_player);
 
-	m_extractors.checkExtract(m_player, *m_enemyManager);
+		m_extractors.checkExtract(m_player, *m_enemyManager);
 
-	m_waveManager.update();
+		m_waveManager.update();
 
-	if (BuffHolder::getInstance().getAlert())
-		interpretApplicators();
+		if (BuffHolder::getInstance().getAlert())
+			interpretApplicators();
+	}
 }
 
 /// <summary>
@@ -139,14 +157,26 @@ void GamePlay::processMouse(sf::Event& t_event)
 {
 	if(sf::Event::MouseMoved == t_event.type)
 	{
+		if (m_levelUp)
+		{
+			m_levelUpScreen->setMouse(m_mousePos);
+		}
 		findMousePos(t_event);
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
+		if (m_levelUp)
+		{
+			m_levelUpScreen->mouseDown();
+		}
 		m_player.setMouse(true);
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
+		if (m_levelUp)
+		{
+			m_levelUpScreen->mouseUp();
+		}
 		m_player.setMouse(false);
 		//BulletManager::getInstance().initNewBullet(m_player.getPos(), m_mousePosGlobal, 20.f);
 	}

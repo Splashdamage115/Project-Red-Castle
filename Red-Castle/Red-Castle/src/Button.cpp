@@ -15,7 +15,7 @@ void Button::init(sf::Texture& t_texture, sf::Vector2i t_frameSize, sf::Vector2f
 	m_buttonS->setTexture(*m_buttonT);
 	m_buttonS->setPosition(t_position);
 	m_buttonS->setTextureRect(sf::IntRect(0, 0, m_frameSize.x, m_frameSize.y));
-	RenderObject::getInstance().add(m_buttonS);
+	RenderObject::getInstance().addHUD(m_buttonS);
 	// !
 
 }
@@ -89,7 +89,8 @@ bool Button::releaseButton()
 {
 	if (m_inBounds)
 	{
-		m_executeFunction();
+		if(m_executeFunction != NULL)
+			m_executeFunction();
 		return true;
 	}
 	return false;

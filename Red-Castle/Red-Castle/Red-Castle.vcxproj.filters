@@ -162,6 +162,9 @@
     <ClCompile Include="src\BuffHolder.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\LevelUpScreen.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -399,6 +402,9 @@
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\PlayerBuffInterpretter.hpp">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LevelUpScreen.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>

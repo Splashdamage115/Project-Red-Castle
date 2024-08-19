@@ -49,7 +49,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔴 - buyable power buffs</li>
     <li>🔴 - armour system player health</li>
     <li>🔴 - Enemy shield</li>
-    <li>🔴 - Level up buffs</li>
+    <li>🟡 - Level up buffs</li>
     <li>🟠 - Tile system</li>
     <li>🔴 - Tile system Doors</li>
     <li>🔴 - Tile system Bridges</li>

@@ -13,6 +13,7 @@
 #include "ExtractManager.h"
 #include "TileSetManager.h"
 #include "WaveManager.h"
+#include "LevelUpScreen.h"
 
 class GamePlay : public GameMode
 {
@@ -38,6 +39,8 @@ private:
 	Player m_player;
 
 	std::vector<std::shared_ptr<SimpleButton>> m_simpleButtons;
+	std::shared_ptr<LevelUpScreen> m_levelUpScreen;
+	bool m_levelUp{ false };
 };
 
 #endif // !GAMEPLAY_H
