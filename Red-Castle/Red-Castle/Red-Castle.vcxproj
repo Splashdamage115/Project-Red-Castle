@@ -73,6 +73,7 @@
     <ClInclude Include="include\Globals.h" />
     <ClInclude Include="include\GunManager.h" />
     <ClInclude Include="include\InputSwitcher.hpp" />
+    <ClInclude Include="include\LevelUpHandler.hpp" />
     <ClInclude Include="include\LevelUpScreen.h" />
     <ClInclude Include="include\Library.h" />
     <ClInclude Include="include\Menu.h" />

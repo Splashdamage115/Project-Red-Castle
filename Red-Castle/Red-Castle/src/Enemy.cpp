@@ -90,6 +90,19 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 		// update the animation
 		m_body->update();
 
+		if(m_damageTime > 0.f)
+		{
+			m_damageTime -= Game::deltaTime;
+			m_fragmentShader->setUniform("time", m_damageTime);
+		}
+		else
+		{
+			if(m_fragmentShader)
+			{
+				m_fragmentShader->setUniform("time", 0.f);
+			}
+		}
+
 		switch (m_currentMove)
 		{
 		case MoveExecute::None:
@@ -119,6 +132,11 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 void Enemy::applyDamage(int t_damage)
 {
 	m_health -= t_damage;
+	m_damageTime = 0.2f;
+	m_fragmentShader = std::make_shared<sf::Shader>();
+	m_fragmentShader->loadFromFile("ASSETS\\SHADERS\\HitTransition.frag", sf::Shader::Fragment);
+	m_fragmentShader->setUniform("duration", 0.2f);
+	m_body->setFragmentShader(m_fragmentShader);
 
 	if (m_health <= 0)
 	{

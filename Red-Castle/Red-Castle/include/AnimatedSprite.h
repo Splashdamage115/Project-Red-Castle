@@ -12,6 +12,14 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	void setColor(sf::Color t_newColor)
+	{
+		m_sprite.setColor(t_newColor);
+	}
+	sf::Color GetColor()
+	{
+		return m_sprite.getColor();
+	}
 	bool getFrameNum(int t_frameToCheck)
 	{
 		if (m_selectedRegion == t_frameToCheck)
@@ -57,8 +65,13 @@ public:
 	void setActive(bool active) { m_active = active; }
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override
 	{
-		if(m_active)
-			target.draw(m_sprite, states);
+		if (m_active)
+		{
+			if (m_shader.lock() != nullptr)
+				target.draw(m_sprite, m_shader.lock().get());
+			else
+				target.draw(m_sprite, states);
+		}
 	}
 	void move(sf::Vector2f& t_newPos) { m_sprite.move(t_newPos); }
 	void setScale(sf::Vector2f t_newScale) { m_sprite.setScale(t_newScale); }
@@ -67,7 +80,10 @@ public:
 	sf::Sprite getSprite() { return m_sprite; }
 	void jumpToFrame(int t_frame) { if (t_frame < static_cast<int>(m_renderRegions.size())) m_selectedRegion = t_frame; }
 	void jumpToRandomFrame() { m_selectedRegion = rand() % m_renderRegions.size(); }
-
+	void setFragmentShader(std::shared_ptr<sf::Shader> t_newShader)
+	{
+		m_shader = t_newShader;
+	}
 private:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
@@ -77,6 +93,7 @@ private:
 	float m_currentFrameTime{ 1.f };
 
 	bool m_active{ true };
+	std::weak_ptr<sf::Shader> m_shader;
 };
 
 #endif // !ANIMATED_SPRITE_H

@@ -407,6 +407,9 @@
     <ClInclude Include="include\LevelUpScreen.h">
       <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
+    <ClInclude Include="include\LevelUpHandler.hpp">
+      <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ASSETS\IMAGES\Buttons\rotate_button.png">

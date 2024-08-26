@@ -17,7 +17,7 @@ GamePlay::GamePlay()
 {
 	resetLevel();
 
-	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("Add move Buff"));
+	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton(""));
 }
 
 /// <summary>
@@ -77,10 +77,10 @@ void GamePlay::processKeys(sf::Event& t_event)
 {
 	if (t_event.key.code == sf::Keyboard::Space)
 	{
-		m_levelUp = true;
+		//m_levelUp = true;
 
-		m_levelUpScreen = std::make_shared<LevelUpScreen>();
-		m_levelUpScreen->init();
+		//m_levelUpScreen = std::make_shared<LevelUpScreen>();
+		//m_levelUpScreen->init();
 	}
 	if (t_event.key.code == sf::Keyboard::F)
 	{
@@ -103,13 +103,7 @@ void GamePlay::update()
 	// ***********************************************
 	if(m_simpleButtons.at(0)->clicked())
 	{
-		Buff newBuff;
-		newBuff.active = true;
-		newBuff.applier = ApplicationType::Once;
-		newBuff.applyLocation = AlertClassName::Player;
-		newBuff.increase = 30.f;
-		newBuff.name = BuffName::PlayerSpeed;
-		BuffHolder::getInstance().initNew(newBuff);
+		
 	}
 	// ***********************************************
 
@@ -120,6 +114,11 @@ void GamePlay::update()
 		{
 			m_levelUp = false;
 			m_levelUpScreen = nullptr;
+
+			if (BuffHolder::getInstance().getAlert())
+				interpretApplicators();
+
+			m_player.refillHealth();
 		}
 	}
 	else
@@ -147,6 +146,14 @@ void GamePlay::update()
 
 		if (BuffHolder::getInstance().getAlert())
 			interpretApplicators();
+		else
+			if (m_levelHandler.checkXp(m_player))
+			{
+				m_levelUp = true;
+
+				m_levelUpScreen = std::make_shared<LevelUpScreen>();
+				m_levelUpScreen->init();
+			}
 	}
 }
 

@@ -23,27 +23,29 @@ public:
 
     void playNewSound(std::string t_soundLocation)
     {
-        for (unsigned int i = 0; i < m_locations.size(); i++)
+        for (unsigned int i = 0; i < m_sounds.size(); i++)
         {
             if (t_soundLocation == m_locations.at(i))
             {
+                m_sounds.at(i).setBuffer(m_buffer.at(i));
                 m_sounds.at(i).play();
                 return;
             }
         }
+
         if (m_buffer.size() < 255)
         {
-            m_locations.push_back(t_soundLocation);
+            m_locations.emplace_back(t_soundLocation);
             m_buffer.emplace_back();
-            if (!m_buffer.back().loadFromFile(t_soundLocation))
+            if (!m_buffer.at(m_buffer.size() - 1).loadFromFile(t_soundLocation))
             {
                 DEBUG_MSG("Couldnt find sound: ");
                 DEBUG_MSG(t_soundLocation);
                 return;
             }
             m_sounds.emplace_back();
-            m_sounds.back().setBuffer(m_buffer.back());
-            m_sounds.back().play();
+            m_sounds.at(m_sounds.size() - 1).setBuffer(m_buffer.at(m_buffer.size() - 1));
+            m_sounds.at(m_sounds.size() - 1).play();
             return;
 
         }
@@ -55,6 +57,7 @@ public:
 
     void playNewOverlapable(std::string t_soundLocation)
     {
+        DEBUG_MSG("PLAYING OVERLAPPABLE");
         if (m_buffer.size() < 255)
         {
             m_locations.push_back(t_soundLocation);

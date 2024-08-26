@@ -14,6 +14,7 @@
 #include "TileSetManager.h"
 #include "WaveManager.h"
 #include "LevelUpScreen.h"
+#include "LevelUpHandler.hpp"
 
 class GamePlay : public GameMode
 {
@@ -37,6 +38,7 @@ private:
 	WaveManager m_waveManager;
 	ExtractManager m_extractors;
 	Player m_player;
+	LevelUpHandler m_levelHandler;
 
 	std::vector<std::shared_ptr<SimpleButton>> m_simpleButtons;
 	std::shared_ptr<LevelUpScreen> m_levelUpScreen;

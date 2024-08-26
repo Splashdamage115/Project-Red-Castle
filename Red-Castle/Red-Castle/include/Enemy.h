@@ -85,6 +85,9 @@ private:
 
 	std::shared_ptr<sf::RectangleShape> m_stabBox;
 	bool m_alive{ false };
+
+	float m_damageTime{ 0.f };
+	std::shared_ptr<sf::Shader> m_fragmentShader;
 };
 
 #endif // !ENEMY_H

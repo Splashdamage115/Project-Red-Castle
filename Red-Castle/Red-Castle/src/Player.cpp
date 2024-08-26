@@ -43,11 +43,11 @@ void Player::init(sf::Vector2f t_position)
 		((-15.f) - m_shadow->getGlobalBounds().height / 2.f)
 	));
 	m_shadow->setPosition(m_body->getPosition());
-	RenderObject::getInstance().add(m_shadow);
+	RenderObject::getInstance().addPlayer(m_shadow);
 
 
 
-	RenderObject::getInstance().add(m_body);
+	RenderObject::getInstance().addPlayer(m_body);
 
 	// initialise XP amt
 	m_xpText = std::make_shared<sf::Text>();
@@ -276,4 +276,10 @@ void Player::expire()
 	m_body->addFrame(sf::IntRect(240 * 2 + 256 + 273, 272, 240, 284));
 	m_body->addFrame(sf::IntRect(240 * 2 + 256 + 273, 272, 240, 284));
 	m_body->addFrame(sf::IntRect(240 * 2 + 256 + 273, 272, 240, 284));
+}
+
+void Player::refillHealth()
+{
+	m_health = m_healthMax;
+	m_hp->setString(std::to_string(m_health));
 }

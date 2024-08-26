@@ -8,10 +8,12 @@
 #include "GunManager.h"
 
 class PlayerBuffInterpretter;
+class LevelUpHandler;
 
 class Player
 {
 friend class PlayerBuffInterpretter;
+friend class LevelUpHandler;
 public:
 	Player();
 	~Player();
@@ -37,6 +39,7 @@ public:
 
 	bool getAlive() { return m_alive; }
 	void followPosition(sf::Vector2f t_pos);
+	void refillHealth();
 private:
 	void expire();
 

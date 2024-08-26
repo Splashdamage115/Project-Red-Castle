@@ -59,6 +59,7 @@ void RenderObject::loadsettings()
 void RenderObject::add(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_assets, t_new); }
 void RenderObject::addHUD(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_hud, t_new); }
 void RenderObject::addParticles(std::shared_ptr<sf::Drawable> t_new){appendToObject(m_particles, t_new);}
+void RenderObject::addPlayer(std::shared_ptr<sf::Drawable> t_new){ appendToObject(m_player, t_new); }
 void RenderObject::addBG(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_backGround, t_new); }
 ////////////////////////////////////////////////
 
@@ -75,6 +76,7 @@ void RenderObject::clear()
 	m_backGround.clear();
 	m_assets.clear();
 	m_hud.clear();
+	m_player.clear();
 	m_particles.clear();
 }
 ////////////////////////////////////////////////
@@ -98,6 +100,10 @@ void RenderObject::render()
 	for (unsigned int i = 0; i < m_assets.size(); i++)
 		if (m_assets.at(i).lock() != nullptr)
 			m_window.draw(*m_assets.at(i).lock());
+
+	for (unsigned int i = 0; i < m_player.size(); i++)
+		if (m_player.at(i).lock() != nullptr)
+			m_window.draw(*m_player.at(i).lock());
 
 	for (unsigned int i = 0; i < m_particles.size(); i++)
 		if (m_particles.at(i).lock() != nullptr)

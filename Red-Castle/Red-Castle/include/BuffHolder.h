@@ -13,6 +13,8 @@ enum class AlertClassName
 	Player, Enemy
 };
 
+
+const int BUFF_AMOUNT = 4;
 enum class BuffName
 {
 	PlayerSpeed, PlayerSpeedPercentage, PlayerHealth, PlayerHealthPercentage
