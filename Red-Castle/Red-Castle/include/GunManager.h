@@ -49,6 +49,8 @@ private:
 	bool m_active{ true };
 
 	bool m_playerDisplay{ false };
+	int m_burstLeft{ 0 };
+	float m_burstCooldownLeft{ 0.f };
 };
 
 #endif // !GUN_MANAGER_H

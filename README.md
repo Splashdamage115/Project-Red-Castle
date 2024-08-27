@@ -23,8 +23,8 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🟡 - buff system</li>
     <li>✅ - logo</li>
     <li>✅ - splash screen</li>
-    <li>🔷 - Sound on splash screen</li>
-    <li>🐛 - Sound overlaying other sounds (only one playing at a time)</li>
+    <li>✅ - Sound on splash screen</li>
+    <li>✅ - Sound overlaying other sounds (only one playing at a time)</li>
     <li>⬜ - Go through old stuff and add comments!!!</li>
     <li>✅ - Enemy hit -1 damage pop up (NOTE : MAY BE LAGGY)</li>
     <li>✅ - Enemy drop system</li>
@@ -34,6 +34,7 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔴 - doctor buff</li>
     <li>🔴 - Droppable power ups</li>
     <li>🔴 - Enemy effects (and for weapons) (poison, ice, fire etc)</li>
+    <li>🔴 - Critical hits</li>
     <li>🟠 - Guns</li>
         <li>     - Bullet stockpiles✅</li>
         <li>     - Reloading✅</li>
@@ -44,12 +45,12 @@ The queen in the high castle, overlooking the subjects, and prisoners
         <li>     - bullet position adjustments ✅</li>
         <li>     - hud ammo✅</li>
         <li>     - hud name✅</li>
-        <li>     - hud mini Icon🟠</li>
+        <li>     - hud mini Icon🔷</li>
     <li>✅ - Buyable Weapons</li>
     <li>🔴 - buyable power buffs</li>
-    <li>🔴 - armour system player health</li>
-    <li>🔴 - Enemy shield</li>
-    <li>🟡 - Level up buffs</li>
+    <li>🔷 - armour system player health</li>
+    <li>🔷 - Enemy shield</li>
+    <li>✅ - Level up buffs</li>
     <li>🟠 - Tile system</li>
     <li>🔴 - Tile system Doors</li>
     <li>🔴 - Tile system Bridges</li>

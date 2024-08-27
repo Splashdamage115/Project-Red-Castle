@@ -16,7 +16,7 @@ Player::~Player()
 
 void Player::init(sf::Vector2f t_position)
 {
-	m_equippedWeapon.equipNewGun(std::make_shared<BasicAssault>());
+	m_equippedWeapon.equipNewGun(std::make_shared<BasicRevolver>());
 
 	m_active = true;
 	m_alive = true;

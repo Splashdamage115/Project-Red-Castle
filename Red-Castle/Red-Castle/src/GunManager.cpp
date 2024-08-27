@@ -83,20 +83,46 @@ void GunManager::update()
 	// reduce shot cooldown
 	if (m_shootCooldownRemaining > 0.f)
 		m_shootCooldownRemaining -= Game::deltaTime;
-	
+
 	if (m_shootCooldownRemaining <= 0.f && m_reloading)
 		reloadWeaponToMax();
 
-	if(m_mouseDown)
+	if(m_burstLeft > 0)
 	{
-		if (m_currentWeapon->fullAuto())
+		//DEBUG_MSG(m_burstCooldownLeft);
+		if (m_burstCooldownLeft > 0.f)
 		{
-			if (m_shootCooldownRemaining <= 0.f)
+			m_burstCooldownLeft -= Game::deltaTime;
+		}
+		if (m_burstCooldownLeft <= 0.f)
+		{
+			m_burstCooldownLeft = m_currentWeapon->burstCooldown();
+			m_burstLeft--;
+
+			if (m_magazine > 0)
+			{
+				spawnBullet();
+			}
+		}
+	}
+	else if (m_shootCooldownRemaining <= 0.f)
+	{
+		if (m_mouseDown)
+		{
+			if (m_currentWeapon->burstCount() > 0)
+			{
+				if (m_burstLeft <= 0)
+				{
+					m_burstLeft = m_currentWeapon->burstCount();
+				}
+			}
+			else if (m_currentWeapon->fullAuto())
 			{
 				if (m_magazine > 0)
 				{
 					spawnBullet();
 				}
+
 			}
 		}
 	}
