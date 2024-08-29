@@ -39,6 +39,7 @@
     <ClCompile Include="src\LevelUpScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Movement.cpp" />
     <ClCompile Include="src\Particles.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\PurchasableManager.cpp" />
@@ -77,6 +78,7 @@
     <ClInclude Include="include\LevelUpScreen.h" />
     <ClInclude Include="include\Library.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Movement.h" />
     <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\PlayerBuffInterpretter.hpp" />

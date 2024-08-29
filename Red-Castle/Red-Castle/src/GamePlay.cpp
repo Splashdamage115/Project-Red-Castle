@@ -17,7 +17,8 @@ GamePlay::GamePlay()
 {
 	resetLevel();
 
-	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton(""));
+	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("close doors"));
+	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("open doors"));
 }
 
 /// <summary>
@@ -105,6 +106,10 @@ void GamePlay::update()
 	{
 		
 	}
+	if (m_simpleButtons.at(1)->clicked())
+	{
+		m_tileSet->openDoors();
+	}
 	// ***********************************************
 
 	if (m_levelUp)
@@ -123,13 +128,18 @@ void GamePlay::update()
 	}
 	else
 	{ 
+		if (m_tileSet->closeDoors(m_player.getBounds()))
+			m_waveManager.enteredNewRoom();
+
 		m_purchasables->update();
 		findMousePosGlobal(); // mouse in the world
 		m_player.setAimVector(m_mousePosGlobal);
 		ParticleSystem::getInstance().update();
 		BulletManager::getInstance().updateBullets();
-		m_player.update();
+		BulletManager::getInstance().checkWallCollisions(m_tileSet->getWalls(m_player.getPos()));
+		m_player.update(m_tileSet->getWalls(m_player.getPos()));
 		m_enemyManager->update(m_player.getPos()); // enemies always chase player
+		m_tileSet->update();
 
 		m_enemyManager->checkHits();
 		ExplosiveManager::getInstance().updateExplosions();
@@ -142,7 +152,7 @@ void GamePlay::update()
 
 		m_extractors.checkExtract(m_player, *m_enemyManager);
 
-		m_waveManager.update();
+		m_waveManager.update(m_player.getPos());
 
 		if (BuffHolder::getInstance().getAlert())
 			interpretApplicators();

@@ -117,3 +117,16 @@ void EnemyManager::checkExplosions()
 	}
 	
 }
+
+int EnemyManager::getActiveEnemyCount()
+{
+	int activeAmt = 0;
+	for (unsigned int enemy = 0; enemy < m_enemies.size(); enemy++)
+	{
+		if (m_enemies.at(enemy).getAlive())
+		{
+			activeAmt++;
+		}
+	}
+	return activeAmt;
+}

@@ -9,7 +9,6 @@ BulletManager::BulletManager()
 // implement spread here somehow
 void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, float t_angle, float t_timeAlive, int t_damage, float t_speed, float t_explosiveRadius)
 {
-	// implement check if any bullets are available to be pushed back into
 	float moveSpeed = t_speed;
 
 	std::shared_ptr<AnimatedSprite> bulletSprite;
@@ -37,7 +36,6 @@ void BulletManager::initNewBullet(sf::Vector2f t_pawnPos, float t_angle, float t
 
 void BulletManager::initNewEnemyBullet(sf::Vector2f t_pawnPos, float t_angle, float t_timeAlive, int t_damage, float t_speed, float t_explosiveRadius)
 {
-	// implement check if any bullets are available to be pushed back into
 	float moveSpeed = t_speed;
 
 	std::shared_ptr<AnimatedSprite> bulletSprite;
@@ -72,5 +70,20 @@ void BulletManager::updateBullets()
 	for (unsigned int i = 0; i < m_bulletsEnemy.size(); i++)
 	{
 		m_bulletsEnemy.at(i).update();
+	}
+}
+
+void BulletManager::checkWallCollisions(std::vector<std::shared_ptr<sf::RectangleShape>>& t_walls)
+{
+	for (unsigned int i = 0; i < m_bullets.size(); i++)
+	{
+		for (unsigned int j = 0; j < t_walls.size(); j++)
+		{
+			if (m_bullets.at(i).body->getGlobalBounds().intersects(t_walls.at(j)->getGlobalBounds()))
+			{
+				m_bullets.at(i).deactivate();
+				break;
+			}
+		}
 	}
 }

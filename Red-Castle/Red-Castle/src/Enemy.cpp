@@ -165,7 +165,7 @@ void Enemy::calculateMove(sf::Vector2f& t_playerPos)
 	sf::Vector2f enemyMove = math::displacement(m_body->getPosition(), t_playerPos) * m_moveSpeed * Game::deltaTime;
 	m_body->move(enemyMove);
 	m_shadow->setPosition(m_body->getPosition());
-
+	
 	m_stabBox->setPosition(m_body->getPosition());
 
 	// flip the character depending on movement

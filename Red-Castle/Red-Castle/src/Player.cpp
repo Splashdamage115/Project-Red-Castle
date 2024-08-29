@@ -5,6 +5,7 @@
 #include "GlobalFontStorage.h"
 #include "ExplosiveManager.h"
 #include "CollisionDetector.h"
+#include "Movement.h"
 
 Player::Player() : m_equippedWeapon(true)
 {
@@ -99,7 +100,7 @@ void Player::init(sf::Vector2f t_position)
 	m_followCam.setCameraType(CameraTracker::CameraType::Delayed_Follow);
 }
 
-void Player::update()
+void Player::update(std::vector<std::shared_ptr<sf::RectangleShape>>& t_walls)
 {
 	if (m_deadTimer > 0.f)
 	{
@@ -149,6 +150,7 @@ void Player::update()
 		m_equippedWeapon.update();
 		// move player based on input type (can be used to set up controller input)
 		sf::Vector2f playerMove = m_input->calculateDisplacement() * m_speed * Game::deltaTime;
+		playerMove = checkCollisions(t_walls, playerMove);
 		m_body->move(playerMove);
 
 		// update player animation frames
@@ -170,6 +172,17 @@ void Player::update()
 		// set camera to follow player position
 		m_followCam.update(m_body->getPosition());
 	}
+}
+
+sf::Vector2f Player::checkCollisions(std::vector<std::shared_ptr<sf::RectangleShape>>& t_walls, sf::Vector2f t_playerMove)
+{
+	Movement cols; // Ensure Movement class is correctly implemented
+	sf::Vector2f position = m_body->getPosition();
+
+	// Ensure calculateIntersects returns the corrected movement vector
+	sf::Vector2f newMovement = cols.calculateIntersects(t_walls, position, 30.f, t_playerMove);
+
+	return newMovement;
 }
 
 void Player::buttonReleased(sf::Keyboard::Key t_keyReleased)
@@ -212,6 +225,7 @@ bool Player::tryPurchase(int t_price)
 
 /// <summary>
 /// Same Weapon Type returns true 
+/// tries to refill held gun to full
 /// </summary>
 /// <param name="t_newGun"></param>
 /// <returns></returns>

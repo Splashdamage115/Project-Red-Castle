@@ -52,8 +52,9 @@ The queen in the high castle, overlooking the subjects, and prisoners
     <li>🔷 - Enemy shield</li>
     <li>✅ - Level up buffs</li>
     <li>🟠 - Tile system</li>
-    <li>🔴 - Tile system Doors</li>
+    <li>🟠 - Tile system Doors</li>
     <li>🔴 - Tile system Bridges</li>
+    <li>🔴 - Room clear fan fair</li>
   </ul>
 <br><br><br>
   </em></p>

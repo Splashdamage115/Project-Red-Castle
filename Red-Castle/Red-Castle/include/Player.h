@@ -19,7 +19,9 @@ public:
 	~Player();
 	void init(sf::Vector2f t_position); // initialise the player to the passed position
 
-	void update();
+	void update(std::vector<std::shared_ptr<sf::RectangleShape>>& t_walls);
+
+	sf::Vector2f checkCollisions(std::vector<std::shared_ptr<sf::RectangleShape>>& t_walls, sf::Vector2f t_playerMove);
 	
 	inline sf::Vector2f getPos() { return m_body->getPosition(); } // return the players position
 
@@ -32,14 +34,14 @@ public:
 
 	void recieveXp(int t_xpAmt);
 	bool tryPurchase(int t_price);
-	bool tryRefillAmmo(std::shared_ptr<GunBasic> t_newGun);
+	bool tryRefillAmmo(std::shared_ptr<GunBasic> t_newGun); 
 	void recieveCash(int t_amtRecieved);
 
 	void applyDamage(int t_damageAmt);
 
 	bool getAlive() { return m_alive; }
 	void followPosition(sf::Vector2f t_pos);
-	void refillHealth();
+	void refillHealth(); // set health to full
 private:
 	void expire();
 

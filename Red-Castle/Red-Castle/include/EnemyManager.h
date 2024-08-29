@@ -16,6 +16,7 @@ public:
 
 	void checkHits();
 	void checkExplosions();
+	int getActiveEnemyCount();
 
 	std::vector<Enemy> getEnemies() { return m_enemies; }
 private:
