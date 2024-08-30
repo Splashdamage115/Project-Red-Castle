@@ -33,13 +33,13 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
-	m_player.init(sf::Vector2f(250.f, 250.f));
-
 	m_enemyManager = std::make_shared<EnemyManager>();
 	m_purchasables = std::make_shared<PurchasableManager>();
 
 	m_tileSet = std::make_shared<TileSetManager>();
 	m_tileSet->init(m_purchasables);
+	
+	m_player.init(m_tileSet->getSpawnRoomCoords());
 
 	m_waveManager.init(m_enemyManager, m_tileSet);
 

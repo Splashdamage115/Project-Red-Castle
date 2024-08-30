@@ -11,14 +11,19 @@ void TileSetManager::init(std::shared_ptr<PurchasableManager> t_purchasables)
 	int X_SIZE = 3;
 	int Y_SIZE = 3;
 
-	int shopRoom = rand() % (X_SIZE * Y_SIZE - 1) + 1;
-	
-	int exitRoom = rand() % (X_SIZE * Y_SIZE - 2) + 1;
-	while(shopRoom == exitRoom)
-		exitRoom = rand() % (X_SIZE * Y_SIZE - 2) + 1;
+	int spawnRoom = rand() % (X_SIZE * Y_SIZE);
+	int shopRoom  = rand() % (X_SIZE * Y_SIZE);
+	int exitRoom  = rand() % (X_SIZE * Y_SIZE);
+
+	while (shopRoom == spawnRoom)
+		shopRoom = rand() % (X_SIZE * Y_SIZE);
+
+	while(shopRoom == exitRoom || exitRoom == spawnRoom)
+		exitRoom = rand() % (X_SIZE * Y_SIZE);
 
 	DEBUG_MSG("Exit: " + std::to_string(exitRoom));
 	DEBUG_MSG("Shop: " + std::to_string(shopRoom));
+	DEBUG_MSG("Spawn: " + std::to_string(spawnRoom));
 
 
 	for (int x = 0; x < X_SIZE; x++)
@@ -51,7 +56,7 @@ void TileSetManager::init(std::shared_ptr<PurchasableManager> t_purchasables)
 
 			int roomIndex = x + y * X_SIZE;
 
-			if (roomIndex == 0)
+			if (roomIndex == spawnRoom)
 			{
 				initialiseRoomClutter(RoomType::Spawn, sf::Vector2f(x * (TILE_SIZE + HALLWAY_LENGTH), y * (TILE_SIZE + HALLWAY_LENGTH)), t_purchasables);
 			}
@@ -145,6 +150,19 @@ void TileSetManager::closeDoors(sf::FloatRect t_playerBounds)
 void TileSetManager::openDoors()
 {
 	m_animationTimeRemaining = DOOR_CLOSE_TIME;
+}
+
+sf::Vector2f TileSetManager::getSpawnRoomCoords()
+{
+	for (unsigned int i = 0; i < m_tiles.size(); i++)
+	{
+		if (m_tiles.at(i).m_roomType == RoomType::Spawn)
+		{
+			return m_tiles.at(i).m_activeArea->getPosition() + sf::Vector2f(TILE_SIZE / 2.f, TILE_SIZE / 2.f);
+		}
+	}
+	DEBUG_MSG("SPAWN ROOM UNINITIALISED");
+	return sf::Vector2f(0.f, 0.f);
 }
 
 void TileSetManager::spawnBox(sf::Vector2f t_topLeftPosition)
@@ -330,6 +348,8 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 
 void TileSetManager::initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_topLeftPos, std::shared_ptr<PurchasableManager> t_purchasables)
 {
+	m_tiles.back().m_roomType = t_roomType;
+
 	switch (t_roomType)
 	{
 	case RoomType::Enemy:

@@ -91,7 +91,7 @@ void Player::init(sf::Vector2f t_position)
 	m_body->setOrigin(playerMidPos);
 
 	// set player spawn
-	m_body->setPosition(sf::Vector2f(250.f, 250.f));
+	m_body->setPosition(t_position);
 
 	//initialise the input type (standard is keyboard for now)
 	m_input = std::make_shared<KeyboardInput>();

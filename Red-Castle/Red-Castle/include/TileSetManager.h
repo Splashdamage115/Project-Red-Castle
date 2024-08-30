@@ -42,6 +42,7 @@ public:
 	bool checkSpawnEnemiesRoom();
 	void closeDoors(sf::FloatRect t_playerBounds); // this takes the whole bounds so to confirm player has fully entered the room and is not on the door
 	void openDoors(); // open the doors after all enemies are killed
+	sf::Vector2f getSpawnRoomCoords();
 private:
 	void spawnBox(sf::Vector2f t_topLeftPosition); // initialise floor tiles
 	void spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Direction> t_directions); // initialise walls and doors for the new area
