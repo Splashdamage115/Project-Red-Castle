@@ -35,20 +35,13 @@ void GamePlay::resetLevel()
 {
 	m_player.init(sf::Vector2f(250.f, 250.f));
 
-	m_tileSet = std::make_shared<TileSetManager>();
-	m_tileSet->init();
-
 	m_enemyManager = std::make_shared<EnemyManager>();
 	m_purchasables = std::make_shared<PurchasableManager>();
 
+	m_tileSet = std::make_shared<TileSetManager>();
+	m_tileSet->init(m_purchasables);
+
 	m_waveManager.init(m_enemyManager, m_tileSet);
-
-	m_purchasables->initNewWeapon(sf::Vector2f(-850.f, 30.f), std::make_shared<BasicSMG>());
-	m_purchasables->initNewWeapon(sf::Vector2f(-650.f, 30.f), std::make_shared<BasicPistol>());
-	m_purchasables->initNewWeapon(sf::Vector2f(-450.f, 30.f), std::make_shared<BasicShotgun>());
-	m_purchasables->initNewWeapon(sf::Vector2f(-250.f, 30.f), std::make_shared <BasicLMG>());
-	m_purchasables->initNewWeapon(sf::Vector2f(-50.f, 30.f), std::make_shared <BasicAssault>());
-
 
 	srand(static_cast<unsigned int>(time(nullptr)));
 }
@@ -127,8 +120,9 @@ void GamePlay::update()
 		}
 	}
 	else
-	{ 
-		if (m_tileSet->closeDoors(m_player.getBounds()))
+	{
+		m_tileSet->closeDoors(m_player.getBounds());
+		if (m_tileSet->checkSpawnEnemiesRoom())
 			m_waveManager.enteredNewRoom();
 
 		m_purchasables->update();

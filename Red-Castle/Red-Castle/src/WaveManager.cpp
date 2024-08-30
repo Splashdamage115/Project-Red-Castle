@@ -20,7 +20,7 @@ void WaveManager::update(sf::Vector2f t_playerPos)
 
 	if(m_spawnDelay <= 0.f)
 	{
-		if(m_roomSpawnRemaining >= 0)
+		if(m_roomSpawnRemaining > 0)
 		{
 			sf::FloatRect bounds = m_tileSet->getActiveBounds(t_playerPos);
 			sf::Vector2i currentTileStart = sf::Vector2i(static_cast<int>(bounds.left), static_cast<int>(bounds.top));

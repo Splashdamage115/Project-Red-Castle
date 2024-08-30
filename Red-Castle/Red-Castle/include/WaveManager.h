@@ -19,8 +19,8 @@ private:
 
 	float m_spawnDelay{ 5.f };
 	int m_roomSpawnAmt{ 10 };
-	int m_roomSpawnRemaining{ 10 };
-	bool m_waitingForNewRoom{ false };
+	int m_roomSpawnRemaining{ 0 };
+	bool m_waitingForNewRoom{ true };
 };
 
 #endif // !WAVE_MANAGER_H

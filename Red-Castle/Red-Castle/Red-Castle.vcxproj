@@ -67,6 +67,7 @@
     <ClInclude Include="include\ExplosiveManager.h" />
     <ClInclude Include="include\ExtractManager.h" />
     <ClInclude Include="include\Extractor.h" />
+    <ClInclude Include="include\FloorTileBlock.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />
     <ClInclude Include="include\GamePlay.h" />
