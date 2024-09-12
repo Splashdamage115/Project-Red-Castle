@@ -181,7 +181,7 @@ void TileSetManager::spawnBox(sf::Vector2f t_topLeftPosition)
 	std::vector<int> level;
 	for (int i = 0; i < static_cast<int>(TILE_SIZE / 4.f); i++)
 	{
-		level.push_back(rand() % 2 + 2);
+		level.push_back(rand() % AMOUNT_OF_FLOOR_TILE_TYPES + OFFSET_TILL_FLOOR_TILES);
 	}
 	m_tiles.back().m_floor->load(sf::Vector2u(64.f,64.f), level, static_cast<unsigned int>(TILE_SIZE / 64.f), static_cast<unsigned int>(TILE_SIZE / 64.f));
 	m_tiles.back().m_floor->setPosition(sf::Vector2f(-TILE_SIZE / 2.f, -TILE_SIZE / 2.f) + t_topLeftPosition);
@@ -302,54 +302,116 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 	m_tiles.back().m_doors = holdVector;
 	
 	// TOP WALLS
+		// wall assets
+	std::vector<int> wallNums;
+	std::shared_ptr<FloorTile> newWalls;
+	newWalls = std::make_shared<FloorTile>();
+
+	for (int i = 0; i < 32; i++)
+		wallNums.push_back(2);
+
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1), static_cast<unsigned int>(1));
+	newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1), static_cast<unsigned int>(1));
+	newWalls->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+		// wall collisions
 	std::shared_ptr<sf::RectangleShape> newWall;
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f((TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS, WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f((TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS, WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 
 
 	// LEFT WALLS
+		// WALL ASSETS
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1));
+	newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1));
+	newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, DOOR_SIZE / 2.f) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+		// WALL COLLISIONS
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, (TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, (TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, DOOR_SIZE / 2.f) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 
 
 	// RIGHT WALLS
+		// WALL ASSETS
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1));
+	newWalls->setPosition(sf::Vector2f(TILE_SIZE / 2.f, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1));
+	newWalls->setPosition(sf::Vector2f(TILE_SIZE / 2.f, DOOR_SIZE / 2.f) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+		// WALL COLLISIONS
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, (TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(TILE_SIZE / 2.f, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, (TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(TILE_SIZE / 2.f, DOOR_SIZE / 2.f) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 
 	// BOTTOM WALLS
+		// wall assets
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1), static_cast<unsigned int>(1));
+	newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, TILE_SIZE / 2.f) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+	newWalls = std::make_shared<FloorTile>();
+	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1), static_cast<unsigned int>(1));
+	newWalls->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, TILE_SIZE / 2.f) + t_topLeftPosition);
+	RenderObject::getInstance().addWalls(newWalls);
+	m_bridgeWallsSprite.push_back(newWalls);
+
+		// wall collisions
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f((TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS, WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, TILE_SIZE / 2.f) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 	newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f((TILE_SIZE - DOOR_SIZE) / 2.f + WALL_THICKNESS, WALL_THICKNESS));
 	newWall->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, TILE_SIZE / 2.f) + t_topLeftPosition);
 	newWall->setFillColor(sf::Color(43, 148, 41));
-	RenderObject::getInstance().addWalls(newWall);
+	//RenderObject::getInstance().addWalls(newWall);
 	wallHolder.push_back(newWall);
 
 	
@@ -420,7 +482,12 @@ void TileSetManager::spawnBridgeWalls(Direction t_spawnDirection, sf::Vector2f t
 
 	
 	int number = 0;
-	
+	std::vector<int> wallNums;
+	std::shared_ptr<FloorTile> newWalls;
+	newWalls = std::make_shared<FloorTile>();
+
+	for (int i = 0; i < 32; i++)
+		wallNums.push_back(2);
 
 	switch (t_spawnDirection)
 	{
@@ -432,13 +499,25 @@ void TileSetManager::spawnBridgeWalls(Direction t_spawnDirection, sf::Vector2f t
 		RenderObject::getInstance().addFloor(newTile);
 		m_bridgeAssets.push_back(newTile);
 
+		
+		newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>(HALLWAY_LENGTH / 64.f));
+		newWalls->setPosition(sf::Vector2f(-DOOR_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - HALLWAY_LENGTH) + t_wallPosition);
+		RenderObject::getInstance().addBridgeWalls(newWalls);
+		m_bridgeWallsSprite.push_back(newWalls);
+
+		newWalls = std::make_shared<FloorTile>();
+		newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>(HALLWAY_LENGTH / 64.f));
+		newWalls->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, -TILE_SIZE / 2.f - HALLWAY_LENGTH) + t_wallPosition);
+		RenderObject::getInstance().addBridgeWalls(newWalls);
+		m_bridgeWallsSprite.push_back(newWalls);
+			
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, HALLWAY_LENGTH));
 		newWall->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, -TILE_SIZE / 2.f - HALLWAY_LENGTH) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		break;
 	case Direction::East:
@@ -450,37 +529,48 @@ void TileSetManager::spawnBridgeWalls(Direction t_spawnDirection, sf::Vector2f t
 		m_bridgeAssets.push_back(newTile);
 		number = 1;
 
+		newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(HALLWAY_LENGTH / 64.f), static_cast<unsigned int>(1));
+		newWalls->setPosition(sf::Vector2f(TILE_SIZE / 2.f, -DOOR_SIZE / 2.f - WALL_THICKNESS) + t_wallPosition);
+		RenderObject::getInstance().addBridgeWalls(newWalls);
+		m_bridgeWallsSprite.push_back(newWalls);
+
+		newWalls = std::make_shared<FloorTile>();
+		newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(HALLWAY_LENGTH / 64.f), static_cast<unsigned int>(1));
+		newWalls->setPosition(sf::Vector2f(TILE_SIZE / 2.f, DOOR_SIZE / 2.f) + t_wallPosition);
+		RenderObject::getInstance().addBridgeWalls(newWalls);
+		m_bridgeWallsSprite.push_back(newWalls);
+
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(HALLWAY_LENGTH, WALL_THICKNESS));
 		newWall->setPosition(sf::Vector2f(TILE_SIZE / 2.f, DOOR_SIZE / 2.f) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		break;
 	case Direction::South:
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, HALLWAY_LENGTH));
 		newWall->setPosition(sf::Vector2f(-DOOR_SIZE / 2.f - WALL_THICKNESS, TILE_SIZE / 2.f) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(WALL_THICKNESS, HALLWAY_LENGTH));
 		newWall->setPosition(sf::Vector2f(DOOR_SIZE / 2.f, TILE_SIZE / 2.f) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		break;
 	case Direction::West:
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(HALLWAY_LENGTH, WALL_THICKNESS));
 		newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - HALLWAY_LENGTH, -DOOR_SIZE / 2.f - WALL_THICKNESS) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		newWall = std::make_shared<sf::RectangleShape>(sf::Vector2f(HALLWAY_LENGTH, WALL_THICKNESS));
 		newWall->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - HALLWAY_LENGTH, DOOR_SIZE / 2.f) + t_wallPosition);
 		newWall->setFillColor(sf::Color(145, 26, 196));
-		RenderObject::getInstance().addBridgeWalls(newWall);
+		//RenderObject::getInstance().addBridgeWalls(newWall);
 		m_bridgeWalls.push_back(newWall);
 		break;
 	case Direction::None:

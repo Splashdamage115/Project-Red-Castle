@@ -17,6 +17,7 @@ enum class RoomType
 
 struct door
 {
+
 	std::shared_ptr<sf::RectangleShape> m_doorSprite;
 	sf::Vector2f m_openPos{ 0.f,0.f };
 	sf::Vector2f m_closedPos{ 0.f,0.f };
@@ -57,12 +58,15 @@ private:
 
 	std::vector<Tile> m_tiles;
 	std::vector<std::shared_ptr<sf::RectangleShape>> m_bridgeWalls;
+	std::vector<std::shared_ptr<FloorTile>> m_bridgeWallsSprite;
 	std::vector<std::shared_ptr<FloorTile>> m_bridgeAssets;
 
 	bool m_closed{ false }; // check if the doors are closed
 	int m_activeAreaNum{ 0 }; // area the player is in (for door animations)
 	float m_animationTimeRemaining{ 0.f };
 
+	static const int OFFSET_TILL_FLOOR_TILES{ 3 };
+	static const int AMOUNT_OF_FLOOR_TILE_TYPES{ 2 };
 	static constexpr float DOOR_CLOSE_TIME{ 0.5f };
 	static constexpr float TILE_SIZE{ 1024.f };
 	static constexpr float HALLWAY_LENGTH{ 320.f };

@@ -33,6 +33,8 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
+	srand(static_cast<unsigned int>(time(nullptr)));
+
 	m_enemyManager = std::make_shared<EnemyManager>();
 	m_purchasables = std::make_shared<PurchasableManager>();
 
@@ -42,8 +44,6 @@ void GamePlay::resetLevel()
 	m_player.init(m_tileSet->getSpawnRoomCoords());
 
 	m_waveManager.init(m_enemyManager, m_tileSet);
-
-	srand(static_cast<unsigned int>(time(nullptr)));
 }
 
 /// <summary>
