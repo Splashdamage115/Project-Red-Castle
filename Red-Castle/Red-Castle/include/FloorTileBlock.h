@@ -2,16 +2,15 @@
 #define FLOOR_TILE_BLOCK_H
 
 #include "Library.h"
+#include "TextureLoader.h"
 
-class : public sf::Drawable, public sf::Transformable
+class FloorTile: public sf::Drawable, public sf::Transformable
 {
 public:
 
-    bool load(const std::string& tileset, sf::Vector2u tileSize, const int* tiles, unsigned int width, unsigned int height)
+    bool load(sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width, unsigned int height)
     {
-        // load the tileset texture
-        if (!m_tileset.loadFromFile(tileset))
-            return false;
+        m_tileset = *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\LEVEL\\FloorTiles.png");
 
         // resize the vertex array to fit the level size
         m_vertices.setPrimitiveType(sf::Triangles);
@@ -22,7 +21,7 @@ public:
             for (unsigned int j = 0; j < height; ++j)
             {
                 // get the current tile number
-                int tileNumber = tiles[i + j * width];
+                int tileNumber = tiles.at(i + j * width);
 
                 // find its position in the tileset texture
                 int tu = tileNumber % (m_tileset.getSize().x / tileSize.x);

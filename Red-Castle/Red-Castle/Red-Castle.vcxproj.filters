@@ -141,9 +141,6 @@
     <ClCompile Include="src\BuffHolder.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy.cpp">
-      <Filter>Source Files\Not Current\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\EnemyManager.cpp">
       <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
@@ -167,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="src\BulletManager.cpp">
       <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files\Not Current\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +365,6 @@
     <ClInclude Include="include\Purchasables.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
-    <ClInclude Include="include\EnemyInfo.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\Extractor.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
@@ -390,9 +387,6 @@
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\EnemyManager.h">
-      <Filter>Header Files\Not Current\GamePlay</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Enemy.h">
       <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
     <ClInclude Include="include\BuffHolder.h">
@@ -418,6 +412,12 @@
     </ClInclude>
     <ClInclude Include="include\FloorTileBlock.h">
       <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyInfo.h">
+      <Filter>Header Files\Not Current\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

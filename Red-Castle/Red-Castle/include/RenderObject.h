@@ -91,6 +91,9 @@ public:
     // add a new Particle on the particle render layer
     void addParticles(std::shared_ptr<sf::Drawable> t_new);
     void addPlayer(std::shared_ptr<sf::Drawable> t_new);
+    void addFloor(std::shared_ptr<sf::Drawable> t_new);
+    void addWalls(std::shared_ptr<sf::Drawable> t_new);
+    void addBridgeWalls(std::shared_ptr < sf::Drawable> t_new);
 
 
     // clear list of render objects
@@ -104,6 +107,9 @@ private:
 
     std::vector<std::weak_ptr< sf::Drawable >> m_hud;
     std::vector<std::weak_ptr< sf::Drawable >> m_backGround;
+    std::vector<std::weak_ptr< sf::Drawable >> m_floor;
+    std::vector<std::weak_ptr< sf::Drawable >> m_bridgeWalls;
+    std::vector<std::weak_ptr< sf::Drawable >> m_walls;
     std::vector<std::weak_ptr< sf::Drawable >> m_assets;
     std::vector<std::weak_ptr< sf::Drawable >> m_player; // I want the player to be above any enemies etc
     std::vector<std::weak_ptr< sf::Drawable >> m_particles;

@@ -60,6 +60,9 @@ void RenderObject::add(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_a
 void RenderObject::addHUD(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_hud, t_new); }
 void RenderObject::addParticles(std::shared_ptr<sf::Drawable> t_new){appendToObject(m_particles, t_new);}
 void RenderObject::addPlayer(std::shared_ptr<sf::Drawable> t_new){ appendToObject(m_player, t_new); }
+void RenderObject::addFloor(std::shared_ptr<sf::Drawable> t_new){ appendToObject(m_floor, t_new); }
+void RenderObject::addWalls(std::shared_ptr<sf::Drawable> t_new){ appendToObject(m_walls, t_new); }
+void RenderObject::addBridgeWalls(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_bridgeWalls, t_new); }
 void RenderObject::addBG(std::shared_ptr<sf::Drawable> t_new) { appendToObject(m_backGround, t_new); }
 ////////////////////////////////////////////////
 
@@ -78,6 +81,9 @@ void RenderObject::clear()
 	m_hud.clear();
 	m_player.clear();
 	m_particles.clear();
+	m_floor.clear();
+	m_walls.clear();
+	m_bridgeWalls.clear();
 }
 ////////////////////////////////////////////////
 
@@ -96,6 +102,18 @@ void RenderObject::render()
 	for (unsigned int i = 0; i < m_backGround.size(); i++)
 		if (m_backGround.at(i).lock() != nullptr)
 			m_window.draw(*m_backGround.at(i).lock());
+
+	for (unsigned int i = 0; i < m_floor.size(); i++)
+		if (m_floor.at(i).lock() != nullptr)
+			m_window.draw(*m_floor.at(i).lock());
+
+	for (unsigned int i = 0; i < m_bridgeWalls.size(); i++)
+		if (m_bridgeWalls.at(i).lock() != nullptr)
+			m_window.draw(*m_bridgeWalls.at(i).lock());
+
+	for (unsigned int i = 0; i < m_walls.size(); i++)
+		if (m_walls.at(i).lock() != nullptr)
+			m_window.draw(*m_walls.at(i).lock());
 
 	for (unsigned int i = 0; i < m_assets.size(); i++)
 		if (m_assets.at(i).lock() != nullptr)

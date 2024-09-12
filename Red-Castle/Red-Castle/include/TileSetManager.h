@@ -3,6 +3,7 @@
 
 #include "Library.h"
 #include "PurchasableManager.h"
+#include "FloorTileBlock.h"
 
 enum class Direction
 {
@@ -28,6 +29,8 @@ struct Tile
 	std::vector<std::shared_ptr<sf::RectangleShape>> m_walls;
 	std::vector<door> m_doors;
 	bool m_closeDoors;
+
+	std::shared_ptr<FloorTile> m_floor;
 };
 
 class TileSetManager
@@ -54,6 +57,7 @@ private:
 
 	std::vector<Tile> m_tiles;
 	std::vector<std::shared_ptr<sf::RectangleShape>> m_bridgeWalls;
+	std::vector<std::shared_ptr<FloorTile>> m_bridgeAssets;
 
 	bool m_closed{ false }; // check if the doors are closed
 	int m_activeAreaNum{ 0 }; // area the player is in (for door animations)
@@ -61,9 +65,9 @@ private:
 
 	static constexpr float DOOR_CLOSE_TIME{ 0.5f };
 	static constexpr float TILE_SIZE{ 1024.f };
-	static constexpr float HALLWAY_LENGTH{ 300.f };
+	static constexpr float HALLWAY_LENGTH{ 320.f };
 	static constexpr float WALL_THICKNESS{ 64.f };
-	static constexpr float DOOR_SIZE{ 250.f };
+	static constexpr float DOOR_SIZE{ 256.f };
 
 };
 

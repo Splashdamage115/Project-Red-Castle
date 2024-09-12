@@ -68,6 +68,7 @@ private:
 	// *******************************************
 
 	std::shared_ptr<AnimatedSprite> m_body; // animated body of the enemy
+	std::shared_ptr<AnimatedSprite> m_spawnAnim;
 	std::shared_ptr<AnimatedSprite> m_shadow;
 	std::shared_ptr<EnemyInfo> m_typeInfo; // used to get the used animation
 	MoveExecute m_currentMove{ MoveExecute::None }; // current state of the enemy
@@ -76,6 +77,7 @@ private:
 	bool m_inAnimation{ false };
 	float m_currentAnimTime{ 0.f };
 	float m_maxAnimTime{ 0.f };
+	bool m_spawning{ false };
 	//
 	
 	int m_health{ 10 };						// health == 0 moves enemy to death

@@ -51,6 +51,11 @@ void Enemy::init(EnemySetupInfo& t_type)
 		break;
 	}
 
+	// set the enemy to the position passed
+	m_body->setPosition(t_type.spawnPos);
+
+	m_spawning = true;
+
 	m_shadow = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\shadow.png"));
 	m_shadow->addFrame(sf::IntRect(0,0,64,16));
 	m_shadow->setOrigin(sf::Vector2f(
@@ -58,7 +63,23 @@ void Enemy::init(EnemySetupInfo& t_type)
 		((m_typeInfo->getShadowPosition().y * m_body->getScale().y) - m_shadow->getGlobalBounds().height / 2.f)
 	));
 	m_shadow->setPosition(m_body->getPosition());
-	RenderObject::getInstance().add(m_shadow);
+
+	m_spawnAnim = std::make_shared<AnimatedSprite>(0.4f, *TextureLoader::getInstance().getTexture("ASSETS\\IMAGES\\MISC\\SpawnAnimation.png"));
+	m_spawnAnim->addFrame(sf::IntRect(0, 0, 64, 64));
+	m_spawnAnim->addFrame(sf::IntRect(64, 0, 64, 64));
+	m_spawnAnim->addFrame(sf::IntRect(128, 0, 64, 64));
+	m_spawnAnim->addFrame(sf::IntRect(192, 0, 64, 64));
+
+	/*m_spawnAnim->setOrigin(sf::Vector2f(
+		((m_typeInfo->getShadowPosition().x * m_body->getScale().x) - m_spawnAnim->getGlobalBounds().width / 2.f),
+		((m_typeInfo->getShadowPosition().y * m_body->getScale().y) - m_spawnAnim->getGlobalBounds().height / 2.f)
+	));*/
+	m_spawnAnim->setPosition(m_body->getPosition());
+	//m_spawnAnim->setScale(sf::Vector2f(3.f, 3.f));
+	RenderObject::getInstance().add(m_spawnAnim);
+
+	m_currentAnimTime = 4.f;
+	
 
 	m_stabBox = std::make_shared<sf::RectangleShape>();
 	m_stabBox->setSize(sf::Vector2f(50.f, 50.f));
@@ -72,15 +93,9 @@ void Enemy::init(EnemySetupInfo& t_type)
 	m_typeInfo->getMoveFrames(m_body);
 
 	//m_enemyType = t_type.enemyType;
-	
-	// set the enemy to the position passed
-	m_body->setPosition(t_type.spawnPos);
 
 	// set origin
 	m_body->setOrigin(sf::Vector2f(m_body->getLocalBounds().width / 2.f, m_body->getLocalBounds().height / 2.f));
-
-	// assign to be drawn
-	RenderObject::getInstance().add(m_body);
 }
 
 void Enemy::update(sf::Vector2f& t_playerPos)
@@ -89,6 +104,22 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 	{
 		// update the animation
 		m_body->update();
+
+		if (m_spawning)
+		{
+			m_currentAnimTime -= Game::deltaTime;
+			m_spawnAnim->update();
+			m_spawnAnim->setPosition(m_body->getPosition());
+			if (m_currentAnimTime <= 0.f)
+			{
+				m_spawning = false;
+				m_spawnAnim = nullptr;
+				// assign to be drawn
+				RenderObject::getInstance().add(m_shadow);
+				RenderObject::getInstance().add(m_body);
+			}
+			return;
+		}
 
 		if(m_damageTime > 0.f)
 		{
@@ -131,6 +162,8 @@ void Enemy::update(sf::Vector2f& t_playerPos)
 
 void Enemy::applyDamage(int t_damage)
 {
+	if (m_spawning)
+		return;
 	m_health -= t_damage;
 	m_damageTime = 0.2f;
 	m_fragmentShader = std::make_shared<sf::Shader>();
