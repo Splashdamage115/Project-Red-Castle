@@ -14,12 +14,12 @@ void Purchasable::initWeaponBuyable(sf::Vector2f t_pos, std::shared_ptr<GunBasic
 	m_body->setPosition(t_pos);
 	RenderObject::getInstance().add(m_body);
 
-	m_collisionSquare = std::make_shared<sf::RectangleShape>(sf::Vector2f(m_body->getGlobalBounds().width, m_body->getGlobalBounds().height) + sf::Vector2f(50.f, 50.f));
-	m_collisionSquare->setPosition(t_pos - sf::Vector2f(25.f, 25.f));
+	m_collisionSquare = std::make_shared<sf::RectangleShape>(sf::Vector2f(m_body->getGlobalBounds().width, m_body->getGlobalBounds().height) + sf::Vector2f(80.f, 80.f));
+	m_collisionSquare->setPosition(t_pos - sf::Vector2f(40.f, 40.f));
 	m_collisionSquare->setFillColor(sf::Color::Transparent);
 	m_collisionSquare->setOutlineThickness(1.f);
 	m_collisionSquare->setOutlineColor(sf::Color::White);
-	RenderObject::getInstance().add(m_collisionSquare);
+	//RenderObject::getInstance().add(m_collisionSquare);
 }
 
 void Purchasable::update()

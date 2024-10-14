@@ -2,7 +2,7 @@
 #include "RenderObject.h"
 #include "Game.h"
 
-void ExtractManager::checkExtract(Player& t_player, EnemyManager& t_enemyManager)
+bool ExtractManager::checkExtract(Player& t_player, EnemyManager& t_enemyManager, sf::Vector2f t_doorCenter)
 {
 	if (m_fadeLast)
 	{
@@ -23,7 +23,7 @@ void ExtractManager::checkExtract(Player& t_player, EnemyManager& t_enemyManager
 		m_extractors.at(2).update(t_player.getPos() - sf::Vector2f(10.f, 0.f), t_enemyManager);
 
 		t_player.followPosition(m_extractors.at(2).getFollowPos());
-		return;
+		return false;
 	}
 	if (!t_player.getAlive() && !m_dying)
 	{
@@ -57,12 +57,14 @@ void ExtractManager::checkExtract(Player& t_player, EnemyManager& t_enemyManager
 				m_extractors.emplace_back();
 				m_extractors.emplace_back();
 
-				m_extractors.at(0).init(sf::Vector2f(0.f, 0.f), false);
-				m_extractors.at(1).init(sf::Vector2f(0.f, 100.f), false);
-				m_extractors.at(2).init(sf::Vector2f(-80.f, 50.f), true);
+				m_extractors.at(0).init(sf::Vector2f(0.f, 0.f) + t_doorCenter, false);
+				m_extractors.at(1).init(sf::Vector2f(0.f, 100.f) + t_doorCenter, false);
+				m_extractors.at(2).init(sf::Vector2f(-80.f, 50.f) + t_doorCenter, true);
 
 				m_wait = 2.f;
 				m_leave = true;
+
+				return true;
 			}
 		}
 
@@ -98,4 +100,5 @@ void ExtractManager::checkExtract(Player& t_player, EnemyManager& t_enemyManager
 			}
 		}
 	}
+	return false;
 }

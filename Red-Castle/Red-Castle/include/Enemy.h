@@ -49,7 +49,7 @@ public:
 	bool inline getActive() { return m_active; }
 	sf::FloatRect getBounds() { return m_body->getGlobalBounds(); }
 	sf::Sprite getSprite() { return m_body->getSprite(); }
-	bool canApplyDamage() { return (m_currentMove != MoveExecute::Expire && m_currentMove != MoveExecute::ExpireFade); }
+	bool canApplyDamage() { return (m_currentMove != MoveExecute::Expire && m_currentMove != MoveExecute::ExpireFade && !m_spawning); }
 	sf::Vector2f getPos() { return m_body->getPosition(); }
 	float getRadius() { return m_collisionRadius; }
 	bool getAlive() { return m_alive; }

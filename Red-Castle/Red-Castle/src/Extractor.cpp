@@ -43,7 +43,8 @@ void ExtractorCharacter::init(sf::Vector2f t_position, bool t_roper)
 	m_body->setOrigin(midPos);
 
 	// set player spawn
-	m_body->setPosition(sf::Vector2f(250.f, 250.f));
+	m_body->setPosition(t_position);
+	m_leavePosition = t_position;
 }
 
 void ExtractorCharacter::update(sf::Vector2f& t_playerPos, EnemyManager& t_enemyManager)
@@ -52,7 +53,7 @@ void ExtractorCharacter::update(sf::Vector2f& t_playerPos, EnemyManager& t_enemy
 	{
 		sf::Vector2f targetPos = t_playerPos;
 		if(m_leaving)
-			targetPos = sf::Vector2f(0.f, 0.f);
+			targetPos = m_leavePosition;
 
 		if (m_leavingTime > 0.f)
 		{

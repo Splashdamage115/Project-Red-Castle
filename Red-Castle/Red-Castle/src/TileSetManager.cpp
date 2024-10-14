@@ -165,6 +165,11 @@ sf::Vector2f TileSetManager::getSpawnRoomCoords()
 	return sf::Vector2f(0.f, 0.f);
 }
 
+sf::Vector2f TileSetManager::doorPosition()
+{
+	return m_tiles.at(m_activeAreaNum).m_doors.at(rand() % m_tiles.at(m_activeAreaNum).m_doors.size()).m_closedPos + sf::Vector2f(DOOR_SIZE / 2.f, DOOR_SIZE / 2.f);
+}
+
 void TileSetManager::spawnBox(sf::Vector2f t_topLeftPosition)
 {
 	m_tiles.emplace_back();
@@ -212,6 +217,13 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 	door newDoor;
 	std::vector<door> holdVector;
 
+	std::vector<int> wallNums;
+	std::shared_ptr<FloorTile> newWalls;
+
+	for (int i = 0; i < 32; i++)
+		wallNums.push_back(2);
+
+
 	for (unsigned int i = 0; i < doorDirections.size(); i++)
 	{
 		switch (static_cast<Direction>(i))
@@ -232,6 +244,12 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 			}
 			else
 			{
+				newWalls = std::make_shared<FloorTile>();
+				newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(DOOR_SIZE / WALL_THICKNESS), static_cast<unsigned int>(1));
+				newWalls->setPosition(sf::Vector2f(-DOOR_SIZE / 2.f, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
+				RenderObject::getInstance().addWalls(newWalls);
+				m_bridgeWallsSprite.push_back(newWalls);
+
 				newDoorCollision->setFillColor(sf::Color(43, 148, 41));
 			}
 			break;
@@ -251,6 +269,12 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 			}
 			else
 			{
+				newWalls = std::make_shared<FloorTile>();
+				newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>(DOOR_SIZE / WALL_THICKNESS));
+				newWalls->setPosition(sf::Vector2f(TILE_SIZE / 2.f, -DOOR_SIZE / 2.f) + t_topLeftPosition);
+				RenderObject::getInstance().addWalls(newWalls);
+				m_bridgeWallsSprite.push_back(newWalls);
+
 				newDoorCollision->setFillColor(sf::Color(43, 148, 41));
 			}
 			break;
@@ -270,6 +294,12 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 			}
 			else
 			{
+				newWalls = std::make_shared<FloorTile>();
+				newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(DOOR_SIZE / WALL_THICKNESS), static_cast<unsigned int>(1));
+				newWalls->setPosition(sf::Vector2f(-DOOR_SIZE / 2.f, TILE_SIZE / 2.f) + t_topLeftPosition);
+				RenderObject::getInstance().addWalls(newWalls);
+				m_bridgeWallsSprite.push_back(newWalls);
+
 				newDoorCollision->setFillColor(sf::Color(43, 148, 41));
 			}
 			break;
@@ -289,6 +319,12 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 			}
 			else
 			{
+				newWalls = std::make_shared<FloorTile>();
+				newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>(1), static_cast<unsigned int>(DOOR_SIZE / WALL_THICKNESS));
+				newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -DOOR_SIZE / 2.f) + t_topLeftPosition);
+				RenderObject::getInstance().addWalls(newWalls);
+				m_bridgeWallsSprite.push_back(newWalls);
+
 				newDoorCollision->setFillColor(sf::Color(43, 148, 41));
 			}
 			break;
@@ -303,12 +339,8 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 	
 	// TOP WALLS
 		// wall assets
-	std::vector<int> wallNums;
-	std::shared_ptr<FloorTile> newWalls;
 	newWalls = std::make_shared<FloorTile>();
 
-	for (int i = 0; i < 32; i++)
-		wallNums.push_back(2);
 
 	newWalls->load(sf::Vector2u(WALL_THICKNESS, WALL_THICKNESS), wallNums, static_cast<unsigned int>((TILE_SIZE - DOOR_SIZE) / 2.f / WALL_THICKNESS + 1), static_cast<unsigned int>(1));
 	newWalls->setPosition(sf::Vector2f(-TILE_SIZE / 2.f - WALL_THICKNESS, -TILE_SIZE / 2.f - WALL_THICKNESS) + t_topLeftPosition);
@@ -419,9 +451,12 @@ void TileSetManager::spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Dire
 	m_tiles.back().m_walls = wallHolder;
 }
 
-void TileSetManager::initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_topLeftPos, std::shared_ptr<PurchasableManager> t_purchasables)
+void TileSetManager::initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_centerPos, std::shared_ptr<PurchasableManager> t_purchasables)
 {
 	m_tiles.back().m_roomType = t_roomType;
+	std::shared_ptr<sf::RectangleShape> newCollision;
+	int chosen = 0;
+	std::shared_ptr<AnimatedSprite> newClutter;
 
 	switch (t_roomType)
 	{
@@ -433,11 +468,36 @@ void TileSetManager::initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_t
 		break;
 	case RoomType::Shop:
 		m_tiles.back().m_closeDoors = false;
-		t_purchasables->initNewWeapon(sf::Vector2f(-400.f, -400.f) + t_topLeftPos, std::make_shared<BasicSMG>());
-		t_purchasables->initNewWeapon(sf::Vector2f(400.f, -400.f) + t_topLeftPos, std::make_shared<BasicPistol>());
-		t_purchasables->initNewWeapon(sf::Vector2f(-400.f, 400.f) + t_topLeftPos, std::make_shared<BasicShotgun>());
-		t_purchasables->initNewWeapon(sf::Vector2f(0.f, 0.f) + t_topLeftPos, std::make_shared<BasicLMG>());
-		t_purchasables->initNewWeapon(sf::Vector2f(400.f, 400.f) + t_topLeftPos,  std::make_shared<BasicAssault>());
+
+		newCollision = std::make_shared<sf::RectangleShape>(sf::Vector2f(600.f, 70.f));
+		newCollision->setOrigin(newCollision->getGlobalBounds().getSize() / 2.f);
+		newCollision->setPosition(t_centerPos);
+		newCollision->setFillColor(sf::Color::Blue);
+		RenderObject::getInstance().add(newCollision);
+		m_tiles.back().m_walls.push_back(newCollision);
+
+		newClutter = std::make_shared<AnimatedSprite>(1.f, *TextureLoader::getInstance().getTexture("ASSETS\\Images\\Level\\tableTop.png"));
+		newClutter->addFrame(sf::IntRect(0, 0, 600, 70));
+		newClutter->setOrigin(newClutter->getGlobalBounds().getSize() / 2.f);
+		newClutter->setPosition(t_centerPos);
+		RenderObject::getInstance().add(newClutter);
+		m_tiles.back().m_clutterAssets.push_back(newClutter);
+
+		for (int i = 0; i < 3; i++)
+		{
+			chosen = rand() % 5;
+
+			if (chosen == 0)
+				t_purchasables->initNewWeapon(sf::Vector2f((i - 1) * 200.f, -15.f) + t_centerPos, std::make_shared<BasicSMG>());
+			if (chosen == 1)
+				t_purchasables->initNewWeapon(sf::Vector2f((i - 1) * 200.f, -15.f) + t_centerPos, std::make_shared<BasicPistol>());
+			if (chosen == 2)
+				t_purchasables->initNewWeapon(sf::Vector2f((i - 1) * 200.f, -15.f) + t_centerPos, std::make_shared<BasicShotgun>());
+			if (chosen == 3)
+				t_purchasables->initNewWeapon(sf::Vector2f((i - 1) * 200.f, -15.f) + t_centerPos, std::make_shared<BasicLMG>());
+			if (chosen == 4)
+				t_purchasables->initNewWeapon(sf::Vector2f((i - 1) * 200.f, -15.f) + t_centerPos, std::make_shared<BasicAssault>());
+		}
 		break;
 	case RoomType::Exit:
 		m_tiles.back().m_closeDoors = false;

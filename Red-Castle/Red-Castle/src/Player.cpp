@@ -53,6 +53,8 @@ void Player::init(sf::Vector2f t_position)
 	// initialise XP amt
 	m_xpText = std::make_shared<sf::Text>();
 	m_xpText->setFont(*GlobalFontStorage::getInstance().getFont());
+	m_xpText->setOutlineColor(sf::Color::Black);
+	m_xpText->setOutlineThickness(1.f);
 	m_xpText->setCharacterSize(24u);
 	m_xpText->setString(std::to_string(m_xpLvl) + "xp");
 	m_xpText->setPosition(sf::Vector2f(30.f, 120.f));
@@ -63,6 +65,8 @@ void Player::init(sf::Vector2f t_position)
 	m_weaponName = std::make_shared<sf::Text>();
 	m_weaponName->setFont(*GlobalFontStorage::getInstance().getFont());
 	m_weaponName->setCharacterSize(24u);
+	m_weaponName->setOutlineColor(sf::Color::Black);
+	m_weaponName->setOutlineThickness(1.f);
 	m_weaponName->setString(m_equippedWeapon.getWeaponTypeName());
 	m_weaponName->setPosition(sf::Vector2f(30.f, 0.f));
 
@@ -72,6 +76,8 @@ void Player::init(sf::Vector2f t_position)
 	m_hp = std::make_shared<sf::Text>();
 	m_hp->setFont(*GlobalFontStorage::getInstance().getFont());
 	m_hp->setCharacterSize(24u);
+	m_hp->setOutlineColor(sf::Color::Black);
+	m_hp->setOutlineThickness(1.f);
 	m_hp->setString(std::to_string(m_health));
 	m_hp->setPosition(sf::Vector2f(30.f, 300.f));
 
@@ -81,6 +87,8 @@ void Player::init(sf::Vector2f t_position)
 	m_cashText = std::make_shared<sf::Text>();
 	m_cashText->setFont(*GlobalFontStorage::getInstance().getFont());
 	m_cashText->setCharacterSize(24u);
+	m_cashText->setOutlineColor(sf::Color::Black);
+	m_cashText->setOutlineThickness(1.f);
 	m_cashText->setString("$" + std::to_string(m_cashAmt));
 	m_cashText->setPosition(sf::Vector2f(30.f, 90.f));
 

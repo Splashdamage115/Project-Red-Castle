@@ -29,6 +29,7 @@ struct Tile
 	std::shared_ptr<sf::RectangleShape > m_activeArea; // floor area
 	std::vector<std::shared_ptr<sf::RectangleShape>> m_walls;
 	std::vector<door> m_doors;
+	std::vector<std::shared_ptr<AnimatedSprite>> m_clutterAssets;
 	bool m_closeDoors;
 
 	std::shared_ptr<FloorTile> m_floor;
@@ -47,10 +48,12 @@ public:
 	void closeDoors(sf::FloatRect t_playerBounds); // this takes the whole bounds so to confirm player has fully entered the room and is not on the door
 	void openDoors(); // open the doors after all enemies are killed
 	sf::Vector2f getSpawnRoomCoords();
+
+	sf::Vector2f doorPosition();
 private:
 	void spawnBox(sf::Vector2f t_topLeftPosition); // initialise floor tiles
 	void spawnWalls(sf::Vector2f t_topLeftPosition, std::vector<Direction> t_directions); // initialise walls and doors for the new area
-	void initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_topLeftPos, std::shared_ptr<PurchasableManager> t_purchasables);
+	void initialiseRoomClutter(RoomType t_roomType, sf::Vector2f t_centerPos, std::shared_ptr<PurchasableManager> t_purchasables);
 	void closeDoorsAnimation();
 	void openDoorsAnimation();
 
@@ -66,7 +69,7 @@ private:
 	float m_animationTimeRemaining{ 0.f };
 
 	static const int OFFSET_TILL_FLOOR_TILES{ 3 };
-	static const int AMOUNT_OF_FLOOR_TILE_TYPES{ 2 };
+	static const int AMOUNT_OF_FLOOR_TILE_TYPES{ 10 };
 	static constexpr float DOOR_CLOSE_TIME{ 0.5f };
 	static constexpr float TILE_SIZE{ 1024.f };
 	static constexpr float HALLWAY_LENGTH{ 320.f };

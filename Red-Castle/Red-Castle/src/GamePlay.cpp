@@ -17,8 +17,8 @@ GamePlay::GamePlay()
 {
 	resetLevel();
 
-	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("close doors"));
-	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("open doors"));
+	/*m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("close doors"));
+	m_simpleButtons.push_back(SimpleButtonHolder::getInstance().spawnNewButton("open doors"));*/
 }
 
 /// <summary>
@@ -95,14 +95,14 @@ void GamePlay::update()
 	// ***********************************************
 	// DEBUG PURPOSSES OF APPLICATION
 	// ***********************************************
-	if(m_simpleButtons.at(0)->clicked())
+	/*if(m_simpleButtons.at(0)->clicked())
 	{
 		
 	}
 	if (m_simpleButtons.at(1)->clicked())
 	{
 		m_tileSet->openDoors();
-	}
+	}*/
 	// ***********************************************
 
 	if (m_levelUp)
@@ -144,7 +144,8 @@ void GamePlay::update()
 		PlayerDamageApplicator::checkHits(m_player, m_enemyManager->getEnemies());
 		PlayerDamageApplicator::checkHitsBullets(m_player);
 
-		m_extractors.checkExtract(m_player, *m_enemyManager);
+		if (m_extractors.checkExtract(m_player, *m_enemyManager, m_tileSet->doorPosition()))
+			m_tileSet->openDoors();
 
 		m_waveManager.update(m_player.getPos());
 

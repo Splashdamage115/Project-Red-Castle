@@ -7,7 +7,7 @@
 class ExtractManager
 {
 public:
-	void checkExtract(Player& t_player, EnemyManager& t_enemyManager);
+	bool checkExtract(Player& t_player, EnemyManager& t_enemyManager, sf::Vector2f t_doorCenter);
 
 private:
 	std::vector<ExtractorCharacter> m_extractors;

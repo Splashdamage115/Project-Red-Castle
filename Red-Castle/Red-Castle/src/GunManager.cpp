@@ -35,6 +35,8 @@ void GunManager::equipNewGun(std::shared_ptr<GunBasic> t_newGun)
 		m_magazineText = std::make_shared<sf::Text>();
 		m_magazineText->setFont(*GlobalFontStorage::getInstance().getFont());
 		m_magazineText->setCharacterSize(24u);
+		m_magazineText->setOutlineColor(sf::Color::Black);
+		m_magazineText->setOutlineThickness(1.f);
 		m_magazineText->setString(std::to_string(m_magazine) + " / " + std::to_string(m_stockpile));
 		m_magazineText->setPosition(30.f, 30.f);
 

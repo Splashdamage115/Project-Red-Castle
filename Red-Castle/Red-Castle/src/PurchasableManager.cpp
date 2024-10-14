@@ -8,6 +8,8 @@ PurchasableManager::PurchasableManager()
     m_priceText = std::make_shared<sf::Text>();
     m_priceText->setFont(*GlobalFontStorage::getInstance().getFont());
     m_priceText->setCharacterSize(24u);
+    m_priceText->setOutlineColor(sf::Color::Black);
+    m_priceText->setOutlineThickness(1.f);
     m_priceText->setString("");
     m_priceText->setPosition(sf::Vector2f(static_cast<float>(SCREEN_WIDTH) / 2.f, static_cast<float>(SCREEN_HEIGHT) / 2.f + 250.f));
 

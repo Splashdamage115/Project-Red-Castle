@@ -20,6 +20,8 @@ private:
 	std::shared_ptr<AnimatedSprite> m_body;
 	std::shared_ptr<sf::RectangleShape> m_ropeLine;
 
+	sf::Vector2f m_leavePosition{ 0.f,0.f };
+
 	GunManager m_weapon;
 	bool m_active{ false };
 	float m_moveSpeed{ 100.f };
